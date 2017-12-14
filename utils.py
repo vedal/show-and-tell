@@ -27,7 +27,7 @@ class FeatureExtractor(nn.Module):
         from torch.nn import Sequential
         self.features = Sequential(
             # stop at conv4
-            *list(original_model.children())[:-3]# + [nn.Linear(512, 10)]
+            *list(original_model.children())[:-2]# + [nn.Linear(512, 10)]
         )
     def forward(self, x):
         x = self.features(x)
