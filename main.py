@@ -37,6 +37,12 @@ def main():
                                         shuffle=True,
                                         num_workers=num_workers)
 
+    """
+    TODO:
+    Add vocab wrapper similar to tutorial. 
+    The code below this line is for CIFAR10, and is currently broken
+    """
+
 
     # show some sample images
     (images, labels) = next(iter(train_loader))
@@ -57,12 +63,12 @@ def main():
     #model = utils.FeatureExtractor(original_model, output_dim=1001)
 
     # freeze weights
-    for param in model.parameters():
+    for param in original_model.parameters():
         param.requires_grad = False
 
-    outputs = model(images) # batch_size x 1000
+    outputs = original_model(images) # batch_size x 1000
 
-    print model
+    print original_model
 
 if __name__ == '__main__':
     main()
