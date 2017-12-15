@@ -8,24 +8,53 @@ from torch.autograd import Variable
 import torch.nn as nn
 import utils
 from data_loader import get_coco_data_loader
+from models import CNN
 
 def main():
     # hyperparameters
     batch_size = 8
     num_workers = 1
+    cnn_output_dim = 1001
 
     # Image Preprocessing
     normalize = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     data_transforms = {
         'train': transforms.Compose([
-            transforms.Scale(256), # Original network trained on ImageNet 256x256
+            transforms.Scale(256),
             #transforms.RandomSizedCrop(224),
-            transforms.RandomHorizontalFlip(),
+            #transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             normalize
         ])
     }
 
+    # load CIFAR10 dataset
+    DATA_PATH = './data/CIFAR10/'
+    train_dataset = datasets.CIFAR10(root=DATA_PATH,
+                                     train=True,
+                                     transform=data_transforms['train'],
+                                     download=True)
+
+    # Data Loader (Input Pipeline)
+    train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
+                                               batch_size=batch_size,
+                                               shuffle=True)
+
+    # take one batch of images
+    images, _ = next(iter(train_loader))
+
+    model = CNN(cnn_output_dim)
+
+    images = Variable(images)
+
+    # forward-pass
+    outputs = model(images)
+
+    print model
+    print outputs.size() # batch_size x cnn_output_dim
+
+
+    """
     # load COCOs dataset
     IMAGES_PATH = 'data/val2017'
     CAPTION_FILE_PATH = 'data/annotations/captions_val2017.json'
@@ -37,26 +66,16 @@ def main():
                                         shuffle=True,
                                         num_workers=num_workers)
 
-    """
-    TODO:
-    Add vocab wrapper similar to tutorial. 
-    The code below this line is for CIFAR10, and is currently broken
-    """
-
 
     # show some sample images
     (images, labels) = next(iter(train_loader))
     #out = make_grid(images)
     #utils.imshow(out,figsize=(10,15),title=[label_names[x] for x in labels])
 
-
     images = Variable(images)
     labels = Variable(labels)
 
-
     # load pretrained ResNet18 model
-    # TODO: consider using DenseNet instead
-    # https://github.com/yunjey/pytorch-tutorial/blob/master/tutorials/02-intermediate/deep_residual_network/main.py
     original_model = models.resnet18(pretrained=True)
     # TODO: re-write as its own class according to the pytorch tutorials, with proper forward()
     # TODO: this is needed for having variable output_dim
@@ -69,6 +88,8 @@ def main():
     outputs = original_model(images) # batch_size x 1000
 
     print original_model
+
+    """
 
 if __name__ == '__main__':
     main()
