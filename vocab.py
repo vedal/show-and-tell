@@ -31,7 +31,7 @@ class Vocabulary(object):
     def __len__(self):
         return len(self.word2idx)
 
-def build_vocab(json='data/annotations/captions_train2017.json', threshold=4):
+def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, max_words=20_000):
     """Build a simple vocabulary wrapper."""
     coco = COCO(json)
     counter = Counter()
@@ -44,8 +44,10 @@ def build_vocab(json='data/annotations/captions_train2017.json', threshold=4):
         if i % 1000 == 0:
             print("[%d/%d] Tokenized the captions." %(i, len(ids)))
 
+    # 4 special tokens
+    words = counter.most_common(max_words-4)
     # If the word frequency is less than 'threshold', then the word is discarded.
-    words = [word for word, cnt in counter.items() if cnt >= threshold]
+    words = [word for word, cnt in words if cnt >= threshold]
 
     # Creates a vocab wrapper and add some special tokens.
     vocab = Vocabulary()
@@ -57,6 +59,7 @@ def build_vocab(json='data/annotations/captions_train2017.json', threshold=4):
     # Adds the words to the vocabulary.
     for i, word in enumerate(words):
         vocab.add_word(word)
+    print('Total number of words in vocab:', len(words))
     return vocab
 
 def dump_vocab(path=path_to_vocab()):
