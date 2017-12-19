@@ -61,10 +61,11 @@ def build_vocab(json='data/annotations/captions_train2017.json', threshold=4):
 
 def dump_vocab(path=path_to_vocab()):
     if not os.path.exists(path):
-        with open(vocab_path, 'wb') as f:
+        vocab = build_vocab()
+        with open(path, 'wb') as f:
             pickle.dump(vocab, f)
         print("Total vocabulary size: %d" %len(vocab))
-        print("Saved the vocabulary wrapper to '%s'" %vocab_path)
+        print("Saved the vocabulary wrapper to '%s'" %path)
     else:
         print('Vocabulary already exists.')
 
