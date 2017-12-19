@@ -4,7 +4,4 @@ from vocab import dump_vocab
 if __name__ == '__main__':
     download_coco()
     download_annotations()
-    dump_vocab()
-
-
-
+    dump_vocab(max_words=20_000)
