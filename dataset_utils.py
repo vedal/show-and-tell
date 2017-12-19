@@ -1,9 +1,9 @@
 import os
 
 def download(path):
-
     fname = os.path.basename(path)
     if os.path.exists(fname):
+        print('File already exists, not downloading.')
         return fname
 
     print('Downloading ' + path)
@@ -24,6 +24,6 @@ def download_and_extract(path, dst):
     filepath = download(path)
     if not os.path.exists(dst):
         os.makedirs(dst)
-    with zipfile.ZipFile(filepath, 'r') as zipfile:
-        zipfile.extractall(dst)
+        with zipfile.ZipFile(filepath, 'r') as zipfile:
+            zipfile.extractall(dst)
 

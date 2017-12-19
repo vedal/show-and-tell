@@ -24,14 +24,13 @@ def path_to_imgs(dataType=DataType.Val):
 def path_to_captions(dataType=DataType.Val):
     return 'data/annotations/captions_{}2017.json'.format(dataType.value)
 
-
-def coco(dataDir=PATH_TO_DATA, dataType=DataType.Train):
+def download_coco(dataType=DataType.Val, dataDir=PATH_TO_DATA):
     baseURL = 'http://images.cocodataset.org/zips/{}2017.zip'
     url = baseURL.format(dataType.value)
     download_and_extract(url, dst=dataDir)
     return os.path.join(dataDir, dataType.value)
 
-def annotations(dataDir=PATH_TO_DATA):
+def download_annotations(dataDir=PATH_TO_DATA):
     annotationsURL = 'http://images.cocodataset.org/annotations/annotations_trainval2017.zip'
     download_and_extract(annotationsURL, dst=dataDir)
 

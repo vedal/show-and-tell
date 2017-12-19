@@ -1,12 +1,12 @@
 import nltk
 import pickle
 import argparse
+import os
 from collections import Counter
 from pycocotools.coco import COCO
 from dataset_coco import PATH_TO_DATA
 
 def path_to_vocab():
-    import os
     return os.path.join(PATH_TO_DATA, 'vocab.pkl')
 
 
@@ -31,7 +31,7 @@ class Vocabulary(object):
     def __len__(self):
         return len(self.word2idx)
 
-def build_vocab(json, threshold):
+def build_vocab(json='data/annotations/captions_train2017.json', threshold=4):
     """Build a simple vocabulary wrapper."""
     coco = COCO(json)
     counter = Counter()
@@ -59,20 +59,26 @@ def build_vocab(json, threshold):
         vocab.add_word(word)
     return vocab
 
+def dump_vocab(path=path_to_vocab()):
+    if not os.path.exists(path):
+        with open(vocab_path, 'wb') as f:
+            pickle.dump(vocab, f)
+        print("Total vocabulary size: %d" %len(vocab))
+        print("Saved the vocabulary wrapper to '%s'" %vocab_path)
+    else:
+        print('Vocabulary already exists.')
+
+
 def main(args):
     vocab = build_vocab(json=args.caption_path,
                         threshold=args.threshold)
     vocab_path = args.vocab_path
-    with open(vocab_path, 'wb') as f:
-        pickle.dump(vocab, f)
-    print("Total vocabulary size: %d" %len(vocab))
-    print("Saved the vocabulary wrapper to '%s'" %vocab_path)
+    dump_vocab(vocab_path)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--caption_path', type=str, 
-                        default='data/annotations/captions_train2017.json', 
                         help='path for train annotation file')
     parser.add_argument('--vocab_path', type=str, default=path_to_vocab(),
                         help='path for saving vocabulary wrapper')
