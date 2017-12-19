@@ -5,21 +5,21 @@ import os
 import pickle
 import numpy as np
 import nltk
+from vocab import Vocabulary
 from PIL import Image
-#from build_vocab import Vocabulary
 from pycocotools.coco import COCO
 
 class CocoDataset(data.Dataset):
     """Coco custom dataset class, compatible with Dataloader
        inspired by pytorch tutorial 03-advanced"""
-    def __init__(self, path, json, vocab=None, transform=None): # TODO: vocab
+    def __init__(self, path, json, vocab=None, transform=None):
         """
 
         :param path: images directory path
         :param json: annotations file path (annotations contain object instances, object keypoints and image captions)
                      this is the Common Objects Context (COCO)
         :param vocab: vocabulary
-        :param transform: a tourchvision.transforms image transformer for preprocessing
+        :param transform: a torchvision.transforms image transformer for preprocessing
         """
 
         self.path = path
@@ -92,7 +92,8 @@ def collate_fn(data):
         padded_captions[ix, :end] = caption[:end]
     return images, padded_captions, caption_lengths
 
-def get_coco_data_loader(path, json, vocab, transform, batch_size, shuffle, num_workers):
+def get_coco_data_loader(path, json, vocab, transform=None,
+        batch_size=32, shuffle=True, num_workers=2):
     """Returns custom COCO Dataloader"""
 
     coco = CocoDataset(path=path,
@@ -111,11 +112,20 @@ def get_coco_data_loader(path, json, vocab, transform, batch_size, shuffle, num_
 
 
 
-"""
-def main():
-    image_dir = 'data/val2017'
-    caption_path = 'data/annotations/captions_val2017.json'
-    CocoDataset(image_dir, caption_path)
 
-main()
-"""
+def main():
+    import dataset_coco
+    from vocab import path_to_vocab
+
+    path_to_imgs = dataset_coco.path_to_imgs()
+    path_to_captions = dataset_coco.path_to_captions()
+
+    with open(path_to_vocab(), 'rb') as f:
+        vocab = pickle.load(f)
+
+    cocoDataset = get_coco_data_loader(path_to_imgs, path_to_captions, vocab)
+    # do something exciting
+
+if __name__ == '__main__':
+    main()
+

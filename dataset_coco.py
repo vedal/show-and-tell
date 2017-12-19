@@ -9,30 +9,33 @@ $ make
 from pycocotools.coco import COCO
 from dataset_utils import download_and_extract
 import os
+from enum import Enum
+
+PATH_TO_DATA = 'data'
+
+class DataType(Enum):
+    Train = 'train'
+    Val = 'val'
+    Test = 'test'
+
+def path_to_imgs(dataType=DataType.Val):
+    return 'data/{}2017'.format(dataType)
+
+def path_to_captions(dataType=DataType.Val):
+    return 'data/annotations/captions_{}2017.json'.format(dataType.value)
 
 
-def coco(dataDir='data', dataType='train2017'):
-  baseURL = 'http://images.cocodataset.org/zips/{}.zip'
-  url = baseURL.format(dataType)
-  download_and_extract(url, dst=dataDir)
-  return os.path.join(dataDir, dataType)
+def coco(dataDir=PATH_TO_DATA, dataType=DataType.Train):
+    baseURL = 'http://images.cocodataset.org/zips/{}2017.zip'
+    url = baseURL.format(dataType.value)
+    download_and_extract(url, dst=dataDir)
+    return os.path.join(dataDir, dataType.value)
 
-def annotations(dataDir='data'):
-  annotationsURL = 'http://images.cocodataset.org/annotations/annotations_trainval2017.zip'
-  download_and_extract(annotationsURL, dst=dataDir)
+def annotations(dataDir=PATH_TO_DATA):
+    annotationsURL = 'http://images.cocodataset.org/annotations/annotations_trainval2017.zip'
+    download_and_extract(annotationsURL, dst=dataDir)
 
-  dataTypes = ['train2017', 'val2017']
-  annFile = '{}/annotations/captions_{}.json'
-  annFiles = map(lambda dataType: annFile.format(dataDir, dataType), dataTypes)
-  return [annFile for annFile in annFiles]
-
-if __name__ == '__main__':
-    # Downloads COCO and fetches captions
-    dataDir = 'data'
-
-    # change to train etc if we want lots of data
-    root_dir = coco(dataType='val2017')
-    annFile_train, annFile_val = annotations(dataDir)
-    train_dataset = datasets.CocoCaptions(root=root_dir,
-                                          annFile=annFile_val,
-                                          transform=data_transforms['train']) 
+    dataTypes = [DataType.Train, DataType.Val]
+    annFile = '{}/annotations/captions_{}2017.json'
+    annFiles = map(lambda dataType: annFile.format(dataDir, dataType.value), dataTypes)
+    return [annFile for annFile in annFiles]
