@@ -44,9 +44,7 @@ class CocoDataset(data.Dataset):
         path = coco.loadImgs(image_id)[0]['file_name']
 
         image = Image.open(os.path.join(self.path, path))
-        # converting to RBG was in a tutorial but for some reason
-        # PIL can't convert from RBG > RGB, not sure if needed
-        #image = image.convert('RGB')
+        image = image.convert('RGB')
 
         if self.transform != None:
             # apply image preprocessing
