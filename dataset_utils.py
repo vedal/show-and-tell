@@ -24,6 +24,6 @@ def download_and_extract(path, dst):
     filepath = download(path)
     if not os.path.exists(dst):
         os.makedirs(dst)
-        with zipfile.ZipFile(filepath, 'r') as zipfile:
-            zipfile.extractall(dst)
+    with zipfile.ZipFile(filepath, 'r') as zipfile:
+        zipfile.extractall(dst)
 
