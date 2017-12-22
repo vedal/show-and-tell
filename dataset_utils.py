@@ -10,9 +10,9 @@ def download(path):
 
     def progress(count, block_size, total_size):
         if count % 20 == 0:
-            print('Downloaded %02.02f/%02.02f MB' % (
+            print('Downloaded %02.02f/%02.02f MB\n' % (
                 count * block_size / 1024.0 / 1024.0,
-                total_size / 1024.0 / 1024.0), end='\r')
+                total_size / 1024.0 / 1024.0))
 
     from six.moves import urllib
     filepath, _ = urllib.request.urlretrieve(path, filename=fname, reporthook=progress)
