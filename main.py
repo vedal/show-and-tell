@@ -20,7 +20,7 @@ def to_var(x, volatile=False):
 
 def main():
     # hyperparameters
-    batch_size = 8
+    batch_size = 32
     num_workers = 1
     cnn_output_dim = 1001
 
