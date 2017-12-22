@@ -1,3 +1,4 @@
+from __future__ import print_function
 import torch
 from torchvision import datasets, models, transforms
 from torchvision.utils import make_grid
@@ -9,6 +10,7 @@ import torch.nn as nn
 import utils
 from data_loader import get_coco_data_loader
 from models import CNN
+from vocab import Vocabulary, load_vocab
 
 def main():
     # hyperparameters
@@ -21,14 +23,16 @@ def main():
     data_transforms = {
         'train': transforms.Compose([
             transforms.Scale(256),
-            #transforms.RandomSizedCrop(224),
-            #transforms.RandomHorizontalFlip(),
+            transforms.RandomSizedCrop(224),
+            transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            normalize
+            transforms.Normalize((0.485, 0.456, 0.406), 
+                                     (0.229, 0.224, 0.225))
         ])
     }
 
     # load CIFAR10 dataset
+    """
     DATA_PATH = './data/CIFAR10/'
     train_dataset = datasets.CIFAR10(root=DATA_PATH,
                                      train=True,
@@ -50,30 +54,33 @@ def main():
     # forward-pass
     outputs = model(images)
 
-    print model
-    print outputs.size() # batch_size x cnn_output_dim
+    print(model)
+    print(outputs.size()) # batch_size x cnn_output_dim
 
 
     """
     # load COCOs dataset
     IMAGES_PATH = 'data/val2017'
     CAPTION_FILE_PATH = 'data/annotations/captions_val2017.json'
+
+    vocab = load_vocab()
     train_loader = get_coco_data_loader(path=IMAGES_PATH,
                                         json=CAPTION_FILE_PATH,
-                                        vocab=None, # TODO, Wojtek
-                                        transform=transforms,
+                                        vocab=vocab,
+                                        transform=data_transforms['train'],
                                         batch_size=batch_size,
                                         shuffle=True,
                                         num_workers=num_workers)
 
 
     # show some sample images
-    (images, labels) = next(iter(train_loader))
-    #out = make_grid(images)
-    #utils.imshow(out,figsize=(10,15),title=[label_names[x] for x in labels])
+    images, captions, lengths = next(iter(train_loader))
+    out = make_grid(images[0])
+    utils.imshow(out, figsize=(10,6), title=[vocab.idx2word[idx] for idx in captions[0]])
 
+    input('Press any button to continue...')
     images = Variable(images)
-    labels = Variable(labels)
+    labels = Variable(captions)
 
     # load pretrained ResNet18 model
     original_model = models.resnet18(pretrained=True)
@@ -87,9 +94,9 @@ def main():
 
     outputs = original_model(images) # batch_size x 1000
 
-    print original_model
+    print(original_model)
 
-    """
+    #"""
 
 if __name__ == '__main__':
     main()

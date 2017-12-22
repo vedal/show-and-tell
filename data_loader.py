@@ -21,7 +21,6 @@ class CocoDataset(data.Dataset):
         :param vocab: vocabulary
         :param transform: a torchvision.transforms image transformer for preprocessing
         """
-
         self.path = path
         self.coco = COCO(json) # object of Coco Helper Class
         self.ids = list(self.coco.anns.keys()) # unique identifiers for annontations
@@ -44,7 +43,11 @@ class CocoDataset(data.Dataset):
         image_id = coco.anns[annotation_id]['image_id']
         path = coco.loadImgs(image_id)[0]['file_name']
 
-        image = Image.open(os.path.join(self.root, path)).convert('RBG')
+        image = Image.open(os.path.join(self.path, path))
+        # converting to RBG was in a tutorial but for some reason
+        # PIL can't convert from RBG > RGB, not sure if needed
+        #image = image.convert('RGB')
+
         if self.transform != None:
             # apply image preprocessing
             image = self.transform(image)
@@ -57,6 +60,9 @@ class CocoDataset(data.Dataset):
                                [vocab('<eos>')])
 
         return image, caption
+
+    def __len__(self):
+        return len(self.ids)
 
 def collate_fn(data):
     """Create mini-batches of (image, caption)

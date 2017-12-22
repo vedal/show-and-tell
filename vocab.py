@@ -31,6 +31,7 @@ class Vocabulary(object):
     def __len__(self):
         return len(self.word2idx)
 
+
 def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, max_words=20000):
     """Build a simple vocabulary wrapper."""
     coco = COCO(json)
@@ -71,6 +72,13 @@ def dump_vocab(path=path_to_vocab()):
         print("Saved the vocabulary wrapper to '%s'" %path)
     else:
         print('Vocabulary already exists.')
+
+def load_vocab(path=path_to_vocab()):
+    try:
+        with open(path, 'rb') as f:
+            return pickle.load(f)
+    except Exception as e:
+        raise RuntimeError('Failed to load %s: %s' % (path, e))
 
 
 def main(args):
