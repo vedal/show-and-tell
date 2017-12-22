@@ -1,3 +1,4 @@
+import torch
 from torch import nn
 from torch.nn import Sequential
 from torchvision import models
@@ -47,11 +48,11 @@ class RNN(torch.nn.Module):
         :param rec_unit: type of recurrent unit (default=gru)
         """
         rec_unit = rec_unit.lower()
-        assert rec_unit in RecNet.__rec_units, 'Specified recurrent unit is not available'
+        assert rec_unit in RNN.__rec_units, 'Specified recurrent unit is not available'
 
         super(RNN, self).__init__()
         self.embeddings = nn.Embedding(vocab_size, emb_size)
-        self.unit = RecNet.__rec_units[rec_unit](emb_size, hidden_size, num_layers,
+        self.unit = RNN.__rec_units[rec_unit](emb_size, hidden_size, num_layers,
                                                  batch_first=True)
         self.linear = nn.Linear(hidden_size, vocab_size)
 
