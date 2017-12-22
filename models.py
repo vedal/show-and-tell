@@ -3,6 +3,7 @@ from torch import nn
 from torch.nn import Sequential
 from torchvision import models
 from torch.autograd import Variable
+from torch.nn.utils.rnn import pack_padded_sequence
 
 class CNN(nn.Module):
     """Class to build new model including all but last layers"""
