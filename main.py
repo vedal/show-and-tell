@@ -78,7 +78,7 @@ def main():
     out = make_grid(images[0])
     utils.imshow(out, figsize=(10,6), title=[vocab.idx2word[idx] for idx in captions[0]])
 
-    input('Press any button to continue...')
+    input('Press Enter to continue...')
     images = Variable(images)
     labels = Variable(captions)
 
