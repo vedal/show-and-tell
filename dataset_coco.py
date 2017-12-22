@@ -1,11 +1,3 @@
-"""
-This requires the COCO API.
-
-$ git clone https://github.com/cocodataset/cocoapi
-$ cd cocoapi/PythonAPI/
-$ make
-"""
-
 from pycocotools.coco import COCO
 from dataset_utils import download_and_extract
 import os
