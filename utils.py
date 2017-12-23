@@ -57,3 +57,14 @@ def load_models(checkpoint_file):
     step = checkpoint['step']
     epoch = checkpoint['epoch']
     return encoder_state_dict, decoder_state_dict, optimizer, step, epoch
+
+def convert_back_to_text(idx_arr, vocab):
+    sampled_caption = []
+    for word_id in idx_arr:
+        word = vocab.idx2word[word_id]
+        sampled_caption.append(word)
+        if word == '<end>':
+            break
+
+    sentence = ' '.join(sampled_caption)
+    return sentence
