@@ -23,7 +23,6 @@ def main(args):
     # hyperparameters
     batch_size = args.batch_size
     num_workers = 1
-    cnn_output_dim = 1001
 
     # Image Preprocessing
     data_transforms = {
@@ -69,9 +68,9 @@ def main(args):
     # Build the models
     ngpu = 1
     initial_step = 0
-    embed_size = 256
+    embed_size = 512
     num_hiddens = 512
-    learning_rate = 2e-3
+    learning_rate = 2e-4
     num_epochs = 3
     log_step = 125
     save_step = 1000
@@ -163,6 +162,6 @@ if __name__ == '__main__':
     parser.add_argument('--checkpoint_file', type=str,
             default=None, help='path to saved checkpoint')
     parser.add_argument('--batch_size', type=int,
-            default=64, help='size of batches')
+            default=128, help='size of batches')
     args = parser.parse_args()
     main(args)
