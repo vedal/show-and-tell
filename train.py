@@ -99,51 +99,54 @@ def main(args):
     # Train the Models
     total_step = len(train_loader)
 
-    for epoch in range(num_epochs):
-        for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
+    try:
+        for epoch in range(num_epochs):
+            for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
 
-            # Set mini-batch dataset
-            images = to_var(images, volatile=True)
-            captions = to_var(captions)
-            targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
-            
-            # Forward, Backward and Optimize
-            decoder.zero_grad()
-            encoder.zero_grad()
+                # Set mini-batch dataset
+                images = to_var(images, volatile=True)
+                captions = to_var(captions)
+                targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
+                
+                # Forward, Backward and Optimize
+                decoder.zero_grad()
+                encoder.zero_grad()
 
-            if ngpu > 1:
-                # run on multiple GPU
-                features = nn.parallel.data_parallel(encoder, images, range(ngpu))
-                outputs = nn.parallel.data_parallel(decoder, features, range(ngpu))
-            else:
-                # run on single GPU
-                features = encoder(images)
-                outputs = decoder(features, captions, lengths)
-
-            train_loss = criterion(outputs, targets)
-            losses_train.append(train_loss.data[0])
-            train_loss.backward()
-            optimizer.step()
-
-            # Print log info
-            if step % log_step == 0:
-                for val_step, (images, captions, lengths) in enumerate(val_loader):
-                    images = to_var(images, volatile=True)
-                    captions = to_var(captions, volatile=True)
-
-                    targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
+                if ngpu > 1:
+                    # run on multiple GPU
+                    features = nn.parallel.data_parallel(encoder, images, range(ngpu))
+                    outputs = nn.parallel.data_parallel(decoder, features, range(ngpu))
+                else:
+                    # run on single GPU
                     features = encoder(images)
                     outputs = decoder(features, captions, lengths)
-                    val_loss = criterion(outputs, targets)
-                    losses_val.append(val_loss.data[0])
 
-                print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
-                
-            # Save the models
-            if (step+1) % save_step == 0:
-                utils.save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path)
+                train_loss = criterion(outputs, targets)
+                losses_train.append(train_loss.data[0])
+                train_loss.backward()
+                optimizer.step()
 
-    #"""
+                # Print log info
+                if step % log_step == 0:
+                    for val_step, (images, captions, lengths) in enumerate(val_loader):
+                        images = to_var(images, volatile=True)
+                        captions = to_var(captions, volatile=True)
+
+                        targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
+                        features = encoder(images)
+                        outputs = decoder(features, captions, lengths)
+                        val_loss = criterion(outputs, targets)
+                        losses_val.append(val_loss.data[0])
+
+                    print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
+                    
+                # Save the models
+                if (step+1) % save_step == 0:
+                    utils.save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path)
+                    utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
+
+    except KeyboardInterrupt:
+        utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
 
 if __name__ == '__main__':

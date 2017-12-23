@@ -51,7 +51,6 @@ def unpickle(file):
         dict = cPickle.load(fo)
     return dict
 
-
 def save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path):
     if not os.path.exists(checkpoint_path):
         os.makedirs(checkpoint_path)
@@ -73,3 +72,8 @@ def load_models(checkpoint_file):
     step = checkpoint['step']
     epoch = checkpoint['epoch']
     return encoder_state_dict, decoder_state_dict, optimizer, step, epoch
+
+def dump_losses(losses_train, losses_val, path):
+    import pickle
+    with open(path, 'wb') as f:
+        pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f)
