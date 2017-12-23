@@ -28,8 +28,7 @@ def main():
     normalize = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     data_transforms = {
         'train': transforms.Compose([
-            transforms.Scale(256),
-            transforms.RandomSizedCrop(224),
+            transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             transforms.Normalize((0.485, 0.456, 0.406), 
@@ -100,7 +99,7 @@ def main():
     save_step = 1000
     model_path = 'models'
     encoder = CNN(embed_size)
-    decoder = RNN(embed_size, num_hiddens, len(vocab), 1)
+    decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit='lstm')
     
     if torch.cuda.is_available():
         encoder.cuda()
