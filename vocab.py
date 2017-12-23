@@ -32,7 +32,7 @@ class Vocabulary(object):
         return len(self.word2idx)
 
 
-def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, max_words=20000):
+def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, max_words=15000):
     """Build a simple vocabulary wrapper."""
     coco = COCO(json)
     counter = Counter()
