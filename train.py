@@ -36,10 +36,10 @@ def main(args):
     }
 
     # load COCOs dataset
-    #IMAGES_PATH = 'data/train2014'
-    #CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
-    IMAGES_PATH = 'data/data_pack/images/dev2014'
-    CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
+    IMAGES_PATH = 'data/train2014'
+    CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
+    #IMAGES_PATH = 'data/data_pack/images/dev2014'
+    #CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
 
     vocab = load_vocab()
     train_loader = get_coco_data_loader(path=IMAGES_PATH,
@@ -77,7 +77,7 @@ def main(args):
     checkpoint_path = 'checkpoints'
 
     encoder = CNN(embed_size)
-    decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit='lstm')
+    decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit=args.rec_unit)
 
     # Loss
     criterion = nn.CrossEntropyLoss()
@@ -166,5 +166,7 @@ if __name__ == '__main__':
             default=None, help='path to saved checkpoint')
     parser.add_argument('--batch_size', type=int,
             default=128, help='size of batches')
+    parser.add_argument('--rec_unit', type=str,
+                        default='gru', help='choose "gru", "lstm" or "elman"')
     args = parser.parse_args()
     main(args)
