@@ -37,40 +37,12 @@ def main():
         ])
     }
 
-    # load CIFAR10 dataset
-    """
-    DATA_PATH = './data/CIFAR10/'
-    train_dataset = datasets.CIFAR10(root=DATA_PATH,
-                                     train=True,
-                                     transform=data_transforms['train'],
-                                     download=True)
-
-    # Data Loader (Input Pipeline)
-    data_loader = torch.utils.data.DataLoader(dataset=train_dataset,
-                                               batch_size=batch_size,
-                                               shuffle=True)
-
-    # take one batch of images
-    images, _ = next(iter(data_loader))
-
-    model = CNN(cnn_output_dim)
-
-    images = Variable(images)
-
-    # forward-pass
-    outputs = model(images)
-
-    print(model)
-    print(outputs.size()) # batch_size x cnn_output_dim
-
-
-    """
     # load COCOs dataset
-    IMAGES_PATH = 'data/val2017'
-    CAPTION_FILE_PATH = 'data/annotations/captions_val2017.json'
+    IMAGES_PATH = 'data/train2017'
+    CAPTION_FILE_PATH = 'data/annotations/captions_train2017.json'
 
     vocab = load_vocab()
-    data_loader = get_coco_data_loader(path=IMAGES_PATH,
+    train_loader = get_coco_data_loader(path=IMAGES_PATH,
                                         json=CAPTION_FILE_PATH,
                                         vocab=vocab,
                                         transform=data_transforms['train'],
@@ -78,10 +50,20 @@ def main():
                                         shuffle=True,
                                         num_workers=num_workers)
 
+    IMAGES_PATH = 'data/val2017'
+    CAPTION_FILE_PATH = 'data/annotations/captions_val2017.json'
+    val_loader = get_coco_data_loader(path=IMAGES_PATH,
+                                      json=CAPTION_FILE_PATH,
+                                      vocab=vocab,
+                                      transform=data_transforms['train'],
+                                      batch_size=batch_size,
+                                      shuffle=True,
+                                      num_workers=num_workers)
+
 
     # show some sample images
     """
-    images, captions, lengths = next(iter(data_loader))
+    images, captions, lengths = next(iter(train_loader))
     out = make_grid(images[0])
     utils.imshow(out, figsize=(10,6), title=[vocab.idx2word[idx] for idx in captions[0]])
 
@@ -107,13 +89,14 @@ def main():
 
     # Build the models
     embed_size = 256
+    num_hiddens = 512
     learning_rate = 0.001
-    num_epochs = 10
-    log_step = 10
+    num_epochs = 3
+    log_step = 125
     save_step = 1000
     model_path = 'models'
     encoder = CNN(embed_size)
-    decoder = RNN(embed_size, 512, len(vocab), 1)
+    decoder = RNN(embed_size, num_hiddens, len(vocab), 1)
     
     if torch.cuda.is_available():
         encoder.cuda()
@@ -125,9 +108,10 @@ def main():
     optimizer = torch.optim.Adam(params, lr=learning_rate)
     
     # Train the Models
-    total_step = len(data_loader)
+    total_step = len(train_loader)
+
     for epoch in range(num_epochs):
-        for i, (images, captions, lengths) in enumerate(data_loader):
+        for i, (images, captions, lengths) in enumerate(train_loader):
             
             # Set mini-batch dataset
             images = to_var(images, volatile=True)
@@ -145,9 +129,17 @@ def main():
 
             # Print log info
             if i % log_step == 0:
-                print('Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f'
-                      %(epoch, num_epochs, i, total_step, 
-                        loss.data[0], np.exp(loss.data[0]))) 
+                for step, (images, captions, lengths) in enumerate(val_loader):
+                    images = to_var(images, volatile=True)
+                    captions = to_var(captions, volatile=True)
+
+                    targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
+                    outputs = capnet.forward(images, captions, lengths)
+                    val_loss = loss_fn(outputs, targets)
+                    losses_val.append(val_loss.data[0])
+
+                print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
+                print('Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f' %(epoch, num_epochs, i, total_step, loss.data[0], np.exp(loss.data[0]))) 
                 
             # Save the models
             if (i+1) % save_step == 0:
