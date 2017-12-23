@@ -1,6 +1,3 @@
-# License: BSD
-# Author: Sasank Chilamkurthy
-
 from __future__ import print_function, division
 
 import torch
@@ -53,3 +50,26 @@ def unpickle(file):
     with open(file, 'rb') as fo:
         dict = cPickle.load(fo)
     return dict
+
+
+def save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path):
+    if not os.path.exists(checkpoint_path):
+        os.makedirs(checkpoint_path)
+    checkpoint_file = os.path.join(checkpoint_path, 'model-%d-%d.ckpt' %(epoch+1, step+1))
+    print('Saving model to:', checkpoint_file)
+    torch.save({
+        'encoder_state_dict': encoder.state_dict(),
+        'decoder_state_dict': decoder.state_dict(),
+        'epoch': epoch,
+        'step': step,
+        'optimizer': optimizer
+        }, checkpoint_file)
+
+def load_models(checkpoint_file):
+    checkpoint = torch.load(checkpoint_file)
+    encoder_state_dict = checkpoint['encoder_state_dict']
+    decoder_state_dict = checkpoint['decoder_state_dict']
+    optimizer = checkpoint['optimizer']
+    step = checkpoint['step']
+    epoch = checkpoint['epoch']
+    return encoder_state_dict, decoder_state_dict, optimizer, step, epoch

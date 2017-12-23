@@ -19,7 +19,7 @@ def to_var(x, volatile=False):
         x = x.cuda()
     return Variable(x, volatile=volatile)
 
-def main():
+def main(args):
     # hyperparameters
     batch_size = 8
     num_workers = 1
@@ -64,61 +64,44 @@ def main():
                                       num_workers=num_workers)
 
 
-    # show some sample images
-    """
-    images, captions, lengths = next(iter(train_loader))
-    out = make_grid(images[0])
-    utils.imshow(out, figsize=(10,6), title=[vocab.idx2word[idx] for idx in captions[0]])
-
-    #input('Press Enter to continue...')
-    """
-
-    #images = Variable(images)
-    #labels = Variable(captions)
-
-    # load pretrained ResNet18 model
-    #original_model = models.resnet18(pretrained=True)
-    # TODO: re-write as its own class according to the pytorch tutorials, with proper forward()
-    # TODO: this is needed for having variable output_dim
-    #model = utils.FeatureExtractor(original_model, output_dim=1001)
-
-    # freeze weights
-    #for param in original_model.parameters():
-    #    param.requires_grad = False
-
-    #outputs = original_model(images) # batch_size x 1000
-
-    #print(original_model)
-
     losses_val = []
     losses_train = []
 
     # Build the models
     ngpu = 1
+    initial_step = 0
     embed_size = 256
     num_hiddens = 512
     learning_rate = 0.001
     num_epochs = 3
     log_step = 125
     save_step = 1000
-    model_path = 'models'
+    checkpoint_path = 'checkpoints'
+
     encoder = CNN(embed_size)
     decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit='lstm')
+
+    # Loss
+    criterion = nn.CrossEntropyLoss()
+
+    if args.checkpoint_file:
+        encoder_state_dict, decoder_state_dict, optimizer, initial_step,\
+                epoch = utils.load_models(args.checkpoint_file)
+        encoder.load_state_dict(encoder_state_dict)
+        decoder.load_state_dict(decoder_state_dict)
+    else:
+        params = list(decoder.parameters()) + list(encoder.linear.parameters()) + list(encoder.batchnorm.parameters())
+        optimizer = torch.optim.Adam(params, lr=learning_rate)
 
     if torch.cuda.is_available():
         encoder.cuda()
         decoder.cuda()
-
-    # Loss and Optimizer
-    criterion = nn.CrossEntropyLoss()
-    params = list(decoder.parameters()) + list(encoder.linear.parameters()) + list(encoder.batchnorm.parameters())
-    optimizer = torch.optim.Adam(params, lr=learning_rate)
     
     # Train the Models
     total_step = len(train_loader)
 
     for epoch in range(num_epochs):
-        for i, (images, captions, lengths) in enumerate(train_loader):
+        for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
 
             # Set mini-batch dataset
             images = to_var(images, volatile=True)
@@ -144,8 +127,8 @@ def main():
             optimizer.step()
 
             # Print log info
-            if i % log_step == 0:
-                for step, (images, captions, lengths) in enumerate(val_loader):
+            if step % log_step == 0:
+                for val_step, (images, captions, lengths) in enumerate(val_loader):
                     images = to_var(images, volatile=True)
                     captions = to_var(captions, volatile=True)
 
@@ -158,15 +141,16 @@ def main():
                 print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
                 
             # Save the models
-            if (i+1) % save_step == 0:
-                torch.save(decoder.state_dict(), 
-                           os.path.join(model_path, 
-                                        'decoder-%d-%d.pkl' %(epoch+1, i+1)))
-                torch.save(encoder.state_dict(), 
-                           os.path.join(model_path, 
-                                        'encoder-%d-%d.pkl' %(epoch+1, i+1)))
+            if (step+1) % save_step == 0:
+                utils.save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path)
 
     #"""
 
+
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--checkpoint_file', type=str,
+            default=None, help='path to saved checkpoint')
+    args = parser.parse_args()
+    main(args)
