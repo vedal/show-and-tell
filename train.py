@@ -38,8 +38,8 @@ def main():
     }
 
     # load COCOs dataset
-    IMAGES_PATH = 'data/train2017'
-    CAPTION_FILE_PATH = 'data/annotations/captions_train2017.json'
+    IMAGES_PATH = 'data/train2014'
+    CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
 
     vocab = load_vocab()
     train_loader = get_coco_data_loader(path=IMAGES_PATH,
@@ -50,8 +50,9 @@ def main():
                                         shuffle=True,
                                         num_workers=num_workers)
 
-    IMAGES_PATH = 'data/val2017'
-    CAPTION_FILE_PATH = 'data/annotations/captions_val2017.json'
+    # Assumes we extracted Wojtek's devset in data/
+    IMAGES_PATH = 'data/data_pack/images/dev2014'
+    CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
     val_loader = get_coco_data_loader(path=IMAGES_PATH,
                                       json=CAPTION_FILE_PATH,
                                       vocab=vocab,
@@ -86,6 +87,9 @@ def main():
     #outputs = original_model(images) # batch_size x 1000
 
     #print(original_model)
+
+    losses_val = []
+    losses_train = []
 
     # Build the models
     embed_size = 256
@@ -123,8 +127,9 @@ def main():
             encoder.zero_grad()
             features = encoder(images)
             outputs = decoder(features, captions, lengths)
-            loss = criterion(outputs, targets)
-            loss.backward()
+            train_loss = criterion(outputs, targets)
+            losses_train.append(train_loss.data[0])
+            train_loss.backward()
             optimizer.step()
 
             # Print log info
@@ -134,12 +139,12 @@ def main():
                     captions = to_var(captions, volatile=True)
 
                     targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
-                    outputs = capnet.forward(images, captions, lengths)
-                    val_loss = loss_fn(outputs, targets)
+                    features = encoder(images)
+                    outputs = decoder(features, captions, lengths)
+                    val_loss = criterion(outputs, targets)
                     losses_val.append(val_loss.data[0])
 
                 print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
-                print('Epoch [%d/%d], Step [%d/%d], Loss: %.4f, Perplexity: %5.4f' %(epoch, num_epochs, i, total_step, loss.data[0], np.exp(loss.data[0]))) 
                 
             # Save the models
             if (i+1) % save_step == 0:
