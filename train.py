@@ -12,6 +12,7 @@ import utils
 from data_loader import get_coco_data_loader
 from models import CNN, RNN
 from vocab import Vocabulary, load_vocab
+import os
 
 def to_var(x, volatile=False):
     if torch.cuda.is_available():
