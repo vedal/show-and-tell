@@ -15,22 +15,6 @@ import os
 plt.ion()   # interactive mode
 
 
-
-class FeatureExtractor(nn.Module):
-    """Class to build new model including all but last layers"""
-    def __init__(self, original_model,output_dim=1000):
-        super(FeatureExtractor, self).__init__()
-
-        from torch.nn import Sequential
-        self.features = Sequential(
-            # stop at conv4
-            *list(original_model.children())[:-2] + [nn.Linear(8, output_dim)]
-        )
-    def forward(self, x):
-        x = self.features(x)
-        return x
-
-
 def imshow(inp, figsize=None, title=None):
     if figsize != None:
         plt.figure(figsize=figsize)
@@ -77,3 +61,14 @@ def dump_losses(losses_train, losses_val, path):
     import pickle
     with open(path, 'wb') as f:
         pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f)
+
+def convert_back_to_text(idx_arr, vocab):
+    sampled_caption = []
+    for word_id in idx_arr:
+        word = vocab.idx2word[word_id]
+        sampled_caption.append(word)
+        if word == '<end>':
+            break
+
+    sentence = ' '.join(sampled_caption)
+    return sentence

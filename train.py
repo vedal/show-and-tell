@@ -71,7 +71,7 @@ def main(args):
     initial_step = 0
     embed_size = 256
     num_hiddens = 512
-    learning_rate = 0.001
+    learning_rate = 2e-3
     num_epochs = 3
     log_step = 125
     save_step = 1000
@@ -95,10 +95,10 @@ def main(args):
     if torch.cuda.is_available():
         encoder.cuda()
         decoder.cuda()
-    
+
+
     # Train the Models
     total_step = len(train_loader)
-
     try:
         for epoch in range(num_epochs):
             for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
@@ -126,8 +126,9 @@ def main(args):
                 train_loss.backward()
                 optimizer.step()
 
-                # Print log info
+                # Run validation set and predict
                 if step % log_step == 0:
+                    # run validation set
                     for val_step, (images, captions, lengths) in enumerate(val_loader):
                         images = to_var(images, volatile=True)
                         captions = to_var(captions, volatile=True)
@@ -137,6 +138,16 @@ def main(args):
                         outputs = decoder(features, captions, lengths)
                         val_loss = criterion(outputs, targets)
                         losses_val.append(val_loss.data[0])
+
+                    # predict
+                    sampled_ids = decoder.sample(features)
+                    sampled_ids = sampled_ids.cpu().data.numpy()[0]
+                    sentence = utils.convert_back_to_text(sampled_ids, vocab)
+                    print(sentence)
+
+                    true_ids = captions.cpu().data.numpy()[0]
+                    sentence = utils.convert_back_to_text(true_ids, vocab)
+                    print(sentence)
 
                     print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
                     
