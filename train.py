@@ -21,12 +21,11 @@ def to_var(x, volatile=False):
 
 def main(args):
     # hyperparameters
-    batch_size = 8
+    batch_size = args.batch_size
     num_workers = 1
     cnn_output_dim = 1001
 
     # Image Preprocessing
-    normalize = transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     data_transforms = {
         'train': transforms.Compose([
             transforms.RandomResizedCrop(224),
@@ -152,5 +151,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint_file', type=str,
             default=None, help='path to saved checkpoint')
+    parser.add_argument('--batch_size', type=int,
+            default=64, help='size of batches')
     args = parser.parse_args()
     main(args)
