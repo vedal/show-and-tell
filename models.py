@@ -10,7 +10,7 @@ class CNN(nn.Module):
     def __init__(self, output_dim=1000):
         super(CNN, self).__init__()
         # TODO: change with resnet152?
-        pretrained_model = models.resnet18(pretrained=True)
+        pretrained_model = models.resnet34(pretrained=True)
         self.resnet = Sequential(*list(pretrained_model.children())[:-1])
         self.linear = nn.Linear(pretrained_model.fc.in_features, output_dim)
         self.batchnorm = nn.BatchNorm1d(output_dim, momentum=0.01)
