@@ -127,7 +127,9 @@ def main(args):
 
                 # Run validation set and predict
                 if step % log_step == 0:
+                    encoder.batchnorm.eval()
                     # run validation set
+                    validation_error = 0
                     for val_step, (images, captions, lengths) in enumerate(val_loader):
                         images = to_var(images, volatile=True)
                         captions = to_var(captions, volatile=True)
@@ -136,7 +138,9 @@ def main(args):
                         features = encoder(images)
                         outputs = decoder(features, captions, lengths)
                         val_loss = criterion(outputs, targets)
-                        losses_val.append(val_loss.data[0])
+                        validation_error += val_loss.data[0]
+
+                    losses_val.append(validation_error)
 
                     # predict
                     sampled_ids = decoder.sample(features)
@@ -149,7 +153,8 @@ def main(args):
                     print(sentence)
 
                     print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
-                    
+                    encoder.batchnorm.train()
+
                 # Save the models
                 if (step+1) % save_step == 0:
                     utils.save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path)
