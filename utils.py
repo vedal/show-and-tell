@@ -15,22 +15,6 @@ import os
 plt.ion()   # interactive mode
 
 
-
-class FeatureExtractor(nn.Module):
-    """Class to build new model including all but last layers"""
-    def __init__(self, original_model,output_dim=1000):
-        super(FeatureExtractor, self).__init__()
-
-        from torch.nn import Sequential
-        self.features = Sequential(
-            # stop at conv4
-            *list(original_model.children())[:-2] + [nn.Linear(8, output_dim)]
-        )
-    def forward(self, x):
-        x = self.features(x)
-        return x
-
-
 def imshow(inp, figsize=None, title=None):
     if figsize != None:
         plt.figure(figsize=figsize)
