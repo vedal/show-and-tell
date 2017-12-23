@@ -2,13 +2,13 @@
 Scalable Machine Learning project
 Image Captioning
 
-training set: MSCOCO Train2014
-val set: subset of MSCOCO Val2014, 132 images
+training set: MSCOCO Train2014. 
+val set: subset of MSCOCO Val2014, 132 images. 
 
-batch_size
-    group: 32
-    wojtek: 128
-vocab_size: 15000
+batch_size. 
+    group: 32. 
+    wojtek: 128. 
+vocab_size: 15000. 
 CNN, pretrained on imagenet
     group: resnet18
     wojtek: resnet34
