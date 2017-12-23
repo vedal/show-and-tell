@@ -21,7 +21,7 @@ def to_var(x, volatile=False):
 
 def main():
     # hyperparameters
-    batch_size = 32
+    batch_size = 8
     num_workers = 1
     cnn_output_dim = 1001
 
@@ -38,8 +38,10 @@ def main():
     }
 
     # load COCOs dataset
-    IMAGES_PATH = 'data/train2014'
-    CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
+    #IMAGES_PATH = 'data/train2014'
+    #CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
+    IMAGES_PATH = 'data/data_pack/images/dev2014'
+    CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
 
     vocab = load_vocab()
     train_loader = get_coco_data_loader(path=IMAGES_PATH,
@@ -92,6 +94,7 @@ def main():
     losses_train = []
 
     # Build the models
+    ngpu = 1
     embed_size = 256
     num_hiddens = 512
     learning_rate = 0.001
@@ -101,7 +104,7 @@ def main():
     model_path = 'models'
     encoder = CNN(embed_size)
     decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit='lstm')
-    
+
     if torch.cuda.is_available():
         encoder.cuda()
         decoder.cuda()
@@ -116,7 +119,7 @@ def main():
 
     for epoch in range(num_epochs):
         for i, (images, captions, lengths) in enumerate(train_loader):
-            
+
             # Set mini-batch dataset
             images = to_var(images, volatile=True)
             captions = to_var(captions)
@@ -125,8 +128,16 @@ def main():
             # Forward, Backward and Optimize
             decoder.zero_grad()
             encoder.zero_grad()
-            features = encoder(images)
-            outputs = decoder(features, captions, lengths)
+
+            if ngpu > 1:
+                # run on multiple GPU
+                features = nn.parallel.data_parallel(encoder, images, range(ngpu))
+                outputs = nn.parallel.data_parallel(decoder, features, range(ngpu))
+            else:
+                # run on single GPU
+                features = encoder(images)
+                outputs = decoder(features, captions, lengths)
+
             train_loss = criterion(outputs, targets)
             losses_train.append(train_loss.data[0])
             train_loss.backward()
