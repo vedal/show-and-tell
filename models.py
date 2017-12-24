@@ -91,7 +91,7 @@ class RNN(torch.nn.Module):
         states = None
         inputs = features.unsqueeze(1)
 
-        for i in xrange(max_len):
+        for i in range(max_len):
             # pass data through recurrent network
             hiddens, states = self.unit(inputs, states)
             outputs = self.linear(hiddens.squeeze(1))
