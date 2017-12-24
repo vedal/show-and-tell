@@ -146,11 +146,11 @@ def main(args):
                     sampled_ids = decoder.sample(features)
                     sampled_ids = sampled_ids.cpu().data.numpy()[0]
                     sentence = utils.convert_back_to_text(sampled_ids, vocab)
-                    print(sentence)
+                    print('Sample:', sentence)
 
                     true_ids = captions.cpu().data.numpy()[0]
                     sentence = utils.convert_back_to_text(true_ids, vocab)
-                    print(sentence)
+                    print('Target:', sentence)
 
                     print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
                     encoder.batchnorm.train()
