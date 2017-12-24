@@ -53,9 +53,9 @@ class CocoDataset(data.Dataset):
         # tokenize captions
         caption_str = str(caption).lower()
         tokens = nltk.tokenize.word_tokenize(caption_str)
-        caption = torch.Tensor([vocab('<start>')] +
+        caption = torch.Tensor([vocab(vocab.start_token())] +
                                [vocab(token) for token in tokens] +
-                               [vocab('<eos>')])
+                               [vocab(vocab.end_token())])
 
         return image, caption
 

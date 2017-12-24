@@ -1,7 +1,6 @@
 from __future__ import print_function
 import torch
 from torchvision import datasets, models, transforms
-from torchvision.utils import make_grid
 from torchvision import transforms
 from torch.autograd import Variable
 from torch.nn.utils.rnn import pack_padded_sequence

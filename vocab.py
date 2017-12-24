@@ -31,6 +31,12 @@ class Vocabulary(object):
     def __len__(self):
         return len(self.word2idx)
 
+    def start_token(self):
+        return '<start>'
+
+    def end_token(self):
+        return '<end>'
+
 
 def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, max_words=15000):
     """Build a simple vocabulary wrapper."""
@@ -53,8 +59,8 @@ def build_vocab(json='data/annotations/captions_train2017.json', threshold=4, ma
     # Creates a vocab wrapper and add some special tokens.
     vocab = Vocabulary()
     vocab.add_word('<pad>')
-    vocab.add_word('<start>')
-    vocab.add_word('<end>')
+    vocab.add_word(vocab.start_token())
+    vocab.add_word(vocab.end_token())
     vocab.add_word('<unk>')
 
     # Adds the words to the vocabulary.
