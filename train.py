@@ -14,38 +14,28 @@ from models import CNN, RNN
 from vocab import Vocabulary, load_vocab
 import os
 
-def to_var(x, volatile=False):
-    if torch.cuda.is_available():
-        x = x.cuda()
-    return Variable(x, volatile=volatile)
-
 def main(args):
     # hyperparameters
     batch_size = args.batch_size
     num_workers = 1
 
     # Image Preprocessing
-    data_transforms = {
-        'train': transforms.Compose([
-            transforms.RandomResizedCrop(224),
-            transforms.RandomHorizontalFlip(),
-            transforms.ToTensor(),
-            transforms.Normalize((0.485, 0.456, 0.406), 
-                                     (0.229, 0.224, 0.225))
+    transform = transforms.Compose([
+        transforms.Resize((224, 224)),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
         ])
-    }
 
     # load COCOs dataset
     IMAGES_PATH = 'data/train2014'
     CAPTION_FILE_PATH = 'data/annotations/captions_train2014.json'
-    #IMAGES_PATH = 'data/data_pack/images/dev2014'
-    #CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
 
     vocab = load_vocab()
     train_loader = get_coco_data_loader(path=IMAGES_PATH,
                                         json=CAPTION_FILE_PATH,
                                         vocab=vocab,
-                                        transform=data_transforms['train'],
+                                        transform=transform,
                                         batch_size=batch_size,
                                         shuffle=True,
                                         num_workers=num_workers)
@@ -56,7 +46,7 @@ def main(args):
     val_loader = get_coco_data_loader(path=IMAGES_PATH,
                                       json=CAPTION_FILE_PATH,
                                       vocab=vocab,
-                                      transform=data_transforms['train'],
+                                      transform=transform,
                                       batch_size=batch_size,
                                       shuffle=True,
                                       num_workers=num_workers)
@@ -95,6 +85,8 @@ def main(args):
         encoder.cuda()
         decoder.cuda()
 
+    if args.sample:
+        return utils.sample(encoder, decoder, vocab, val_loader)
 
     # Train the Models
     total_step = len(train_loader)
@@ -103,8 +95,8 @@ def main(args):
             for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
 
                 # Set mini-batch dataset
-                images = to_var(images, volatile=True)
-                captions = to_var(captions)
+                images = utils.to_var(images, volatile=True)
+                captions = utils.to_var(captions)
                 targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
                 
                 # Forward, Backward and Optimize
@@ -131,8 +123,8 @@ def main(args):
                     # run validation set
                     validation_error = 0
                     for val_step, (images, captions, lengths) in enumerate(val_loader):
-                        images = to_var(images, volatile=True)
-                        captions = to_var(captions, volatile=True)
+                        images = utils.to_var(images, volatile=True)
+                        captions = utils.to_var(captions, volatile=True)
 
                         targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
                         features = encoder(images)
@@ -163,7 +155,6 @@ def main(args):
     except KeyboardInterrupt:
         utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
-
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
@@ -172,6 +163,8 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int,
             default=128, help='size of batches')
     parser.add_argument('--rec_unit', type=str,
-                        default='gru', help='choose "gru", "lstm" or "elman"')
+            default='gru', help='choose "gru", "lstm" or "elman"')
+    parser.add_argument('--sample', default=False, 
+            action='store_true', help='just show result, requires --checkpoint_file')
     args = parser.parse_args()
     main(args)

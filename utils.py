@@ -6,13 +6,13 @@ import torch.optim as optim
 from torch.optim import lr_scheduler
 from torch.autograd import Variable
 import numpy as np
-import torchvision
 from torchvision import datasets, models, transforms
+from torchvision.utils import make_grid
 import matplotlib.pyplot as plt
 import time
 import os
 
-plt.ion()   # interactive mode
+#plt.ion()   # interactive mode
 
 
 def imshow(inp, figsize=None, title=None):
@@ -28,6 +28,7 @@ def imshow(inp, figsize=None, title=None):
     if title is not None:
         plt.title(title)
     plt.pause(0.001)  # pause a bit so that plots are updated
+    plt.show()
 
 def unpickle(file):
     import cPickle
@@ -72,3 +73,29 @@ def convert_back_to_text(idx_arr, vocab):
 
     sentence = ' '.join(sampled_caption)
     return sentence
+
+def sample(encoder, decoder, vocab, val_loader):
+    encoder.batchnorm.eval()
+    # run validation set
+    images, captions, lengths = next(iter(val_loader))
+    captions = to_var(captions, volatile=True)
+
+    targets = nn.utils.rnn.pack_padded_sequence(captions, lengths, batch_first=True)[0]
+    features = encoder(to_var(images, volatile=True))
+
+    # predict
+    sampled_ids = decoder.sample(features)
+
+    sampled_ids = sampled_ids.cpu().data.numpy()[0]
+    predicted = convert_back_to_text(sampled_ids, vocab)
+
+    true_ids = captions.cpu().data.numpy()[0]
+    target = convert_back_to_text(true_ids, vocab)
+
+    out = make_grid(images[0])
+    imshow(out, figsize=(10,6), title='Target: %s\nPrediction: %s' % (target, predicted))
+
+def to_var(x, volatile=False):
+    if torch.cuda.is_available():
+        x = x.cuda()
+    return Variable(x, volatile=volatile)
