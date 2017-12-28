@@ -56,13 +56,13 @@ def main(args):
 
     # Build the models
     ngpu = 1
-    initial_step = 0
+    initial_step = initial_epoch = 0
     embed_size = 512
     num_hiddens = 512
     learning_rate = 2e-4
     num_epochs = 3
     log_step = 125
-    save_step = 1000
+    save_step = 500
     checkpoint_path = 'checkpoints'
 
     encoder = CNN(embed_size)
@@ -72,8 +72,8 @@ def main(args):
     criterion = nn.CrossEntropyLoss()
 
     if args.checkpoint_file:
-        encoder_state_dict, decoder_state_dict, optimizer, initial_step,\
-                epoch = utils.load_models(args.checkpoint_file)
+        encoder_state_dict, decoder_state_dict, optimizer, *meta = utils.load_models(args.checkpoint_file)
+        initial_step, initial_epoch, losses_train, losses_val = meta
         encoder.load_state_dict(encoder_state_dict)
         decoder.load_state_dict(decoder_state_dict)
     else:
@@ -90,7 +90,9 @@ def main(args):
     # Train the Models
     total_step = len(train_loader)
     try:
-        for epoch in range(num_epochs):
+        for epoch in range(initial_epoch, num_epochs):
+            batch_loss_train = []
+
             for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
 
                 # Set mini-batch dataset
@@ -112,7 +114,7 @@ def main(args):
                     outputs = decoder(features, captions, lengths)
 
                 train_loss = criterion(outputs, targets)
-                losses_train.append(train_loss.data[0])
+                batch_loss_train.append(train_loss.data[0])
                 train_loss.backward()
                 optimizer.step()
 
@@ -120,7 +122,7 @@ def main(args):
                 if step % log_step == 0:
                     encoder.batchnorm.eval()
                     # run validation set
-                    validation_error = 0
+                    batch_loss_val = []
                     for val_step, (images, captions, lengths) in enumerate(val_loader):
                         images = utils.to_var(images, volatile=True)
                         captions = utils.to_var(captions, volatile=True)
@@ -129,9 +131,10 @@ def main(args):
                         features = encoder(images)
                         outputs = decoder(features, captions, lengths)
                         val_loss = criterion(outputs, targets)
-                        validation_error += val_loss.data[0]
+                        batch_loss_val.append(val_loss.data[0])
 
-                    losses_val.append(validation_error)
+                    losses_train.append(np.mean(batch_loss_train))
+                    losses_val.append(np.mean(batch_loss_val))
 
                     # predict
                     sampled_ids = decoder.sample(features)
@@ -143,15 +146,19 @@ def main(args):
                     sentence = utils.convert_back_to_text(true_ids, vocab)
                     print('Target:', sentence)
 
-                    print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, train_loss.data[0], val_loss.data[0]))
+                    print('Epoch: {} - Step: {} - Train Loss: {} - Eval Loss: {}'.format(epoch, step, losses_train[-1], losses_val[-1]))
                     encoder.batchnorm.train()
 
                 # Save the models
                 if (step+1) % save_step == 0:
-                    utils.save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path)
+                    utils.save_models(encoder, decoder, optimizer, epoch, step, losses_train, losses_val, checkpoint_path)
                     utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
     except KeyboardInterrupt:
+        pass
+    finally:
+        # Do final save
+        utils.save_models(encoder, decoder, optimizer, epoch, step, losses_train, losses_val, checkpoint_path)
         utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
 if __name__ == '__main__':
