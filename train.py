@@ -72,7 +72,7 @@ def main(args):
     criterion = nn.CrossEntropyLoss()
 
     if args.checkpoint_file:
-        encoder_state_dict, decoder_state_dict, optimizer, *meta = utils.load_models(args.checkpoint_file)
+        encoder_state_dict, decoder_state_dict, optimizer, *meta = utils.load_models(args.checkpoint_file,args.sample)
         initial_step, initial_epoch, losses_train, losses_val = meta
         encoder.load_state_dict(encoder_state_dict)
         decoder.load_state_dict(decoder_state_dict)
