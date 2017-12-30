@@ -5,6 +5,7 @@ import os
 import pickle
 import numpy as np
 import nltk
+import re
 from vocab import Vocabulary
 from PIL import Image
 from pycocotools.coco import COCO
@@ -114,22 +115,63 @@ def get_coco_data_loader(path, json, vocab, transform=None,
     return data_loader
 
 
+class ImagesDataset(data.Dataset):
+    """
+    """
+    def __init__(self, dir_path, transform=None):
+        """
+        :param dir_path:
+        :param transform:
+        :returns:
+        """
+        self.dir_path = dir_path
+        self.transform = transform
 
+        _a, _b, files = next(os.walk(dir_path))
+        self.file_names = files
 
+    def __getitem__(self, idx):
+        """
+        :param idx:
+        :returns:
+        """
+        # load image and caption
+        file_name = self.file_names[idx]
+        image_id = re.findall('[0-9]{12}', file_name)[0]
+        image_path = os.path.join(self.dir_path, file_name)
+        image = Image.open(image_path).convert('RGB')
 
-def main():
-    import dataset_coco
-    from vocab import path_to_vocab
+        # transform image
+        if self.transform is not None:
+            image = self.transform(image)
 
-    path_to_imgs = dataset_coco.path_to_imgs()
-    path_to_captions = dataset_coco.path_to_captions()
+        return image, image_id
 
-    with open(path_to_vocab(), 'rb') as f:
-        vocab = pickle.load(f)
+    def __len__(self):
+        """
+        :returns:
+        """
+        return len(self.file_names)
 
-    cocoDataset = get_coco_data_loader(path_to_imgs, path_to_captions, vocab)
-    # do something exciting
+def get_basic_loader(dir_path, transform, batch_size=32, shuffle=True, num_workers=2):
+    """
+    Returns torch.utils.data.DataLoader for custom coco dataset.
+    :param dir_path:
+    :param ann_path:
+    :param vocab:
+    :param transform:
+    :param batch_size:
+    :param shuffle:
+    :param num_workers:
+    :returns:
+    """
+    datas = ImagesDataset(dir_path=dir_path, transform=transform)
 
-if __name__ == '__main__':
-    main()
-
+    # Data loader for COCO dataset
+    # This will return (images, captions, lengths) for every iteration.
+    # images: tensor of shape (batch_size, 3, 224, 224).
+    # captions: tensor of shape (batch_size, padded_length).
+    # lengths: list indicating valid length for each caption. length is (batch_size).
+    data_loader = data.DataLoader(dataset=datas, batch_size=batch_size,
+                                  shuffle=shuffle, num_workers=num_workers)
+    return data_loader
