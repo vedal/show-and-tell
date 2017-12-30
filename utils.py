@@ -70,12 +70,10 @@ def dump_losses(losses_train, losses_val, path):
         pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f)
 
 def convert_back_to_text(idx_arr, vocab):
-    sampled_caption = []
-    for word_id in idx_arr:
-        word = vocab.idx2word[word_id]
-        sampled_caption.append(word)
-        if word == '<end>':
-            break
+    from itertools import takewhile
+    blacklist = [vocab.word2idx[word] for word in [vocab.start_token()]]
+    predicate = lambda word_id: vocab.idx2word[word_id] != vocab.end_token()
+    sampled_caption = [vocab.idx2word[word_id] for word_id in takewhile(predicate, idx_arr) if word_id not in blacklist]
 
     sentence = ' '.join(sampled_caption)
     return sentence
@@ -99,6 +97,8 @@ def sample(encoder, decoder, vocab, val_loader):
     target = convert_back_to_text(true_ids, vocab)
 
     out = make_grid(images[0])
+    print('Target: ', target)
+    print('Prediction: ', predicted)
     imshow(out, figsize=(10,6), title='Target: %s\nPrediction: %s' % (target, predicted))
 
 def to_var(x, volatile=False):
