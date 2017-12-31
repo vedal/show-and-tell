@@ -121,3 +121,6 @@ venv.bak/
 
 # if cloning cocoapi in the same folder
 cocoapi
+
+# default directory to store checkpoints
+checkpoints
