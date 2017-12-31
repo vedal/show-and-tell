@@ -1,17 +1,5 @@
 
 
-batch_size: 128
-vocab_size: 15000
-CNN resnet34, pretrained on imagenet
-lr: 2e-4
-embed_size
-    group: 256,512
-log_step: 125
-
-Experiments:  
-Comparing Basic_RNN, LSTM and GRU    
-
-
 # Neural Image Captioning
 The goal of this project was to tackle the problem of automatic caption generation for images. As part of the project the Neural Image Captioning (NIC) model proposed by Vinyals et al. was reimplemented.
 
@@ -40,17 +28,17 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (Language Generator) affects the overall performance of the NIC model.
 
 #### Setup
-The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. All weights, except from the last layer, were frozen during the training procedure.
+The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. The output layer of the network was replaced with a new layer with a size definable by the user. All weights, except from the last layer, were frozen during the training procedure.
 
-The Decoder was a single layer recurrent neural network. The different Recurrent units were tested, `Elman`, `LSTML`, and `GRU`.
+The Decoder was a single layer recurrent neural network. Three different Recurrent units were tested, `Elman`, `LSTML`, and `GRU`.
 
 Training parameters:
-- Learning rate: `1e-3`, with Step LR decay
+- Learning rate: `1e-3`, with LR decay every 2000 batches
 - Batch size: 128
 - Vocabulary size: 15k
 
 #### Evaluation Methods
-Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evluation used the following metrics: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
+Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
 
 ### Results
 #### Quantitative
