@@ -64,14 +64,14 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
     <th>CIDEr</th>
   </tr>
   <tr>
-    <td>Vinyal et al.</td>
-    <td>BLEU-1</td>
-    <td>BLEU-2</td>
-    <td>BLEU-3</td>
-    <td>BLEU-4</td>    
-    <td>ROGUE-L</td>
-    <td>METEOR</td>
-    <td>CIDEr</td>
+    <td>Vinyal et al. (4k subset)</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>27.7</td>    
+    <td>N/A</td>
+    <td>23.7</td>
+    <td>85.5</td>
   </tr>
   <tr>
     <td>elman256</td>
