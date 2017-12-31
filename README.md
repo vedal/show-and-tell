@@ -1,9 +1,9 @@
 
 
 # Neural Image Captioning
-The goal of this project was to tackle the problem of automatic caption generation for images. As part of the project the Neural Image Captioning (NIC) model proposed by Vinyals et al. was reimplemented.
+The goal of this project was to tackle the problem of automatic caption generation for images of real world scenes. The work consisted of reimplementing the Neural Image Captioning (NIC) model proposed by Vinyals et al. and running appropriate experiments to tests its performance.
 
-This project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
+The project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
 
 ### Contributors
 - Martin Hwasser (github: [hwaxxer](https://github.com/hwaxxer/)) 
@@ -41,6 +41,8 @@ Training parameters:
 - Batch size: 128 (3236 batches per epoch)
 - Vocabulary size: 15k
 - Learning rate: `1e-3`, with LR decay every 2000 batches
+
+Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library.
 
 
 #### Evaluation Methods
