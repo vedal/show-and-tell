@@ -89,7 +89,7 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
     <td>29.5</td>
     <td>20.1</td>    
     <td>45.8</td>
-    <td>19.7/td>
+    <td>19.7</td>
     <td>58.7</td>
   </tr>
   <tr>
