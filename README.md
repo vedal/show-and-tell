@@ -44,8 +44,12 @@ Bla bla bla
 #### Setup
 Bla bla bla
 
+#### Evaluation Methods
+Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evluation used popular metrics, such as BLEU-1, BLEU-2, BLEU-3, BLEU-4, ROGUE-L, METEOR, and CIDEr. 
+
 ### Results
-#### GRU/LST/Elman
+#### Quantitative
+#### Qualitative
 #  <div>
 #  <img align="center" src="/misc/ss1.png" width=405>
 #  <img align="center" src="/misc/ss2.png" width=415>
