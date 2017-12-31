@@ -84,13 +84,13 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
   </tr>
   <tr>
     <td>elman512</td>
-    <td>BLEU-1</td>
-    <td>BLEU-2</td>
-    <td>BLEU-3</td>
-    <td>BLEU-4</td>    
-    <td>ROGUE-L</td>
-    <td>METEOR</td>
-    <td>CIDEr</td>
+    <td>62.3</td>
+    <td>43.5</td>
+    <td>29.5</td>
+    <td>20.1</td>    
+    <td>45.8</td>
+    <td>19.7/td>
+    <td>58.7</td>
   </tr>
   <tr>
     <td>gru256</td>
