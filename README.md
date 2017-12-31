@@ -1,9 +1,4 @@
-# kth-sml-project
-Scalable Machine Learning project
-Image Captioning
 
-training set: MSCOCO Train2014.
-val set: subset of MSCOCO Val2014, 2048 images.
 
 batch_size: 128
 vocab_size: 15000
@@ -18,7 +13,7 @@ Comparing Basic_RNN, LSTM and GRU
 
 
 # Neural Image Captioning
-The goal of this project was to reimplement the Neural Image Captioning (NIC) model proposed in the article by Vinyals et al.
+The goal of this project was to tackle the problem of automatic caption generation for images. As part of the project the Neural Image Captioning (NIC) model proposed by Vinyals et al. was reimplemented.
 
 This project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
 
@@ -37,18 +32,25 @@ Experiments were conducted using the [Common Objects in Context](http://cocodata
 - Validation: 2014 Contest Val images [41K images/6GB]
 - Test: 2014 Contest Test images [41K images/6GB]
 
+### Architecture
+The NIC architecture consists of two models, the Encoder and a Decoder. The Encoder, which is a Convolutional Neural Network, is used to create a (semantic) summary of the image in a form of a fixed sized vector. The Decoder, which is a Recurrent Neural Network, is used to generate the caption in natural language based on the summary vector created by the encoder.
+
 ### Experiments
-#### Research Question
-Bla bla bla
+#### Goals
+The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the decoder (language generator) affects the overall performance of the NIC model.
 
 #### Setup
-Bla bla bla
+
+
 
 #### Evaluation Methods
-Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evluation used popular metrics, such as BLEU-1, BLEU-2, BLEU-3, BLEU-4, ROGUE-L, METEOR, and CIDEr. 
+Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evluation used the following metrics: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
 
 ### Results
 #### Quantitative
+- Show scores for each model in table
+- Show reference scores from paper
+
 #### Qualitative
 #  <div>
 #  <img align="center" src="/misc/ss1.png" width=405>
