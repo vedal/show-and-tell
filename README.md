@@ -46,6 +46,8 @@ Training parameters:
 - Number of epochs: `3`
 - Batch size: `128` (3236 batches per epoch)
 - Vocabulary size: `15,000` most popular words
+- Embedding size: `512` (image summary vector, word embeddings)
+- RNN hidden state size: `256` and `512`
 - Learning rate: `1e-3`, with LR decay every 2000 batches
 
 Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained locally and on rented AWS instances (both local and remote machines were equipped with GPUs).
