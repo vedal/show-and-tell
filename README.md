@@ -5,20 +5,24 @@ The goal of this project was to tackle the problem of automatic caption generati
 
 The project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
 
+
 ### Contributors
 - Martin Hwasser (github: [hwaxxer](https://github.com/hwaxxer/)) 
 - Wojciech Kryściński (github: [muggin](https://github.com/muggin/))
 - Amund Vedal (github: [amundv](https://github.com/amundv))
 
+
 ### References
 The implemented architecture was based on the following publication:
 - ["Show and Tell: A Neural Image Captiong Generator" by Vinyals et al.](https://arxiv.org/abs/1411.4555)
+
 
 ### Datasets
 Experiments were conducted using the [Common Objects in Context](http://cocodataset.org/) dataset. The following subsets were used:
 - Training: 2014 Contest Train images [83K images/13GB]
 - Validation: 2014 Contest Val images [41K images/6GB]
 - Test: 2014 Contest Test images [41K images/6GB]
+
 
 ### Architecture
 The NIC architecture consists of two models, the Encoder and a Decoder. The Encoder, which is a Convolutional Neural Network, is used to create a (semantic) summary of the image in a form of a fixed sized vector. The Decoder, which is a Recurrent Neural Network, is used to generate the caption in natural language based on the summary vector created by the encoder.
@@ -27,9 +31,11 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 <img src="/report/nic-model.png" width=600>
 </p>
 
+
 ### Experiments
 #### Goals
 The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (language generator) affects the overall performance of the NIC model.
+
 
 #### Setup
 The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. The output layer of the network was replaced with a new layer with a size definable by the user. All weights, except from the last layer, were frozen during the training procedure.
@@ -44,8 +50,10 @@ Training parameters:
 
 Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained locally and on rented AWS instances (both local and remote machines were equipped with GPUs).
 
+
 #### Evaluation Methods
 Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
+
 
 ### Results
 #### Quantitative
@@ -137,6 +145,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
 </table>
 
+
 #### Qualitative
 **Captions without errors** (left-to-right: Elman, GRU, LSTM)
 <div>
@@ -145,6 +154,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   <img align="center" src="/report/example1-lstm.png" width=275>
 </div>
 
+
 **Captions with minor errors** (left-to-right: Elman, GRU, LSTM)
 <div>
   <img align="center" src="/report/example2-elman.png" width=275>
@@ -152,12 +162,14 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   <img align="center" src="/report/example2-lstm.png" width=275>
 </div>
 
+
 **Captions somewhat related to images** (left-to-right: Elman, GRU, LSTM)
 <div>
   <img align="center" src="/report/example3-elman.png" width=275>
   <img align="center" src="/report/example3-gru.png" width=275>
   <img align="center" src="/report/example3-lstm.png" width=275>
 </div>
+
 
 **Captions unrelated to image** (left-to-right: Elman, GRU, LSTM)
 <div>
