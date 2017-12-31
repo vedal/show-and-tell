@@ -49,6 +49,8 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
 
 ### Results
 #### Quantitative
+Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article.
+
 <table>
   <tr>
     <th colspan="8">Validation Data</th>
@@ -136,7 +138,6 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
 </table>
 
 #### Qualitative
-
 **Captions without errors** (left-to-right: Elman, GRU, LSTM)
 <div>
   <img align="center" src="/report/example1-elman.png" width=275>
