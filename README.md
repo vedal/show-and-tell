@@ -124,13 +124,13 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
   </tr>
   <tr>
     <td>lstm512</td>
-    <td>BLEU-1</td>
-    <td>BLEU-2</td>
-    <td>BLEU-3</td>
-    <td>BLEU-4</td>    
-    <td>ROGUE-L</td>
-    <td>METEOR</td>
-    <td>CIDEr</td>
+    <td>60.4</td>
+    <td>41.3</td>
+    <td>27.2</td>
+    <td>18.0</td>    
+    <td>44.6</td>
+    <td>18.8</td>
+    <td>51.2</td>
   </tr>
 </table>
 
