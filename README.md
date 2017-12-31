@@ -135,7 +135,8 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
 </table>
 
 #### Qualitative
-#  <div>
-#  <img align="center" src="/misc/ss1.png" width=405>
-#  <img align="center" src="/misc/ss2.png" width=415>
-#  </div>
+<div>
+  <img align="center" src="/results/example1-elman.png" width=300>
+  <img align="center" src="/results/example1-gru.png" width=300>
+  <img align="center" src="/results/example1-lstm.png" width=300>
+</div>
