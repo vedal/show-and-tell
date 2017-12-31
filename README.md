@@ -37,11 +37,17 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 
 ### Experiments
 #### Goals
-The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the decoder (language generator) affects the overall performance of the NIC model.
+The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (Language Generator) affects the overall performance of the NIC model.
 
 #### Setup
+The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. All weights, except from the last layer, were frozen during the training procedure.
 
+The Decoder was a single layer recurrent neural network. The different Recurrent units were tested, `Elman`, `LSTML`, and `GRU`.
 
+Training parameters:
+- Learning rate: `1e-3`, with Step LR decay
+- Batch size: 128
+- Vocabulary size: 15k
 
 #### Evaluation Methods
 Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evluation used the following metrics: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
