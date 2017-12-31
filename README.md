@@ -104,13 +104,13 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
   </tr>
   <tr>
     <td>gru512</td>
-    <td>BLEU-1</td>
-    <td>BLEU-2</td>
-    <td>BLEU-3</td>
-    <td>BLEU-4</td>    
-    <td>ROGUE-L</td>
-    <td>METEOR</td>
-    <td>CIDEr</td>
+    <td>44.4</td>
+    <td>24.7</td>
+    <td>13.5</td>
+    <td>7.5</td>    
+    <td>33.0</td>
+    <td>14.3</td>
+    <td>27.6</td>
   </tr>
   <tr>
     <td>lstm256</td>
@@ -123,7 +123,7 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
     <td>CIDEr</td>
   </tr>
   <tr>
-    <td>lmst512</td>
+    <td>lstm512</td>
     <td>BLEU-1</td>
     <td>BLEU-2</td>
     <td>BLEU-3</td>
