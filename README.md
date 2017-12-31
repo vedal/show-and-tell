@@ -1,7 +1,7 @@
 
 
 # Neural Image Captioning
-The goal of this project was to tackle the problem of automatic caption generation for images of real world scenes. The work consisted of reimplementing the Neural Image Captioning (NIC) model proposed by Vinyals et al. and running appropriate experiments to tests its performance.
+The goal of this project was to tackle the problem of automatic caption generation for images of real world scenes. The work consisted of reimplementing the Neural Image Captioning (NIC) model proposed by Vinyals et al. and running appropriate experiments to test its performance.
 
 The project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
 
@@ -29,21 +29,20 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 
 ### Experiments
 #### Goals
-The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (Language Generator) affects the overall performance of the NIC model.
+The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (language generator) affects the overall performance of the NIC model.
 
 #### Setup
 The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. The output layer of the network was replaced with a new layer with a size definable by the user. All weights, except from the last layer, were frozen during the training procedure.
 
-The Decoder was a single layer recurrent neural network. Three different Recurrent units were tested, `Elman`, `LSTML`, and `GRU`.
+The Decoder was a single layer recurrent neural network. Three different recurrent units were tested, `Elman`, `GRU`, and `LSTM`.
 
 Training parameters:
-- Number of epochs: 3
-- Batch size: 128 (3236 batches per epoch)
-- Vocabulary size: 15k
+- Number of epochs: `3`
+- Batch size: `128` (3236 batches per epoch)
+- Vocabulary size: `15,000` most popular words
 - Learning rate: `1e-3`, with LR decay every 2000 batches
 
-Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library.
-
+Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained locally and on rented AWS instances (both local and remote machines were equipped with GPUs).
 
 #### Evaluation Methods
 Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
