@@ -46,7 +46,10 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
 
 ### Results
 #### Quantitative
-<table align="center">
+<table>
+  <tr>
+    <th colspan="8">Validation Data</th>
+  </tr>
   <tr>
     <th>Model</th>
     <th>BLEU-1</th>
@@ -128,9 +131,6 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
     <td>CIDEr</td>
   </tr>
 </table>
-
-- Show scores for each model in table
-- Show reference scores from paper
 
 #### Qualitative
 #  <div>
