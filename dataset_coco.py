@@ -1,6 +1,6 @@
-from pycocotools.coco import COCO
-from dataset_utils import download_and_extract
 import os
+from pycocotools.coco import COCO
+from downloader import download_and_extract
 from enum import Enum
 
 PATH_TO_DATA = 'data'
