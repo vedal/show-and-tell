@@ -23,6 +23,10 @@ Experiments were conducted using the [Common Objects in Context](http://cocodata
 ### Architecture
 The NIC architecture consists of two models, the Encoder and a Decoder. The Encoder, which is a Convolutional Neural Network, is used to create a (semantic) summary of the image in a form of a fixed sized vector. The Decoder, which is a Recurrent Neural Network, is used to generate the caption in natural language based on the summary vector created by the encoder.
 
+<p align="center">
+<img src="/report/nic-model.png" width=600>
+</p>
+
 ### Experiments
 #### Goals
 The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (Language Generator) affects the overall performance of the NIC model.
