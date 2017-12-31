@@ -135,8 +135,31 @@ Experiments were evaluated in a qualitative and quantitative manner. Qualitatitv
 </table>
 
 #### Qualitative
+
+**Captions without errors** (left-to-right: Elman, GRU, LSTM)
 <div>
-  <img align="center" src="/report/example1-elman.png" width=300>
-  <img align="center" src="/report/example1-gru.png" width=300>
-  <img align="center" src="/report/example1-lstm.png" width=300>
+  <img align="center" src="/report/example1-elman.png" width=275>
+  <img align="center" src="/report/example1-gru.png" width=275>
+  <img align="center" src="/report/example1-lstm.png" width=275>
+</div>
+
+**Captions with minor errors** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example2-elman.png" width=275>
+  <img align="center" src="/report/example2-gru.png" width=275>
+  <img align="center" src="/report/example2-lstm.png" width=275>
+</div>
+
+**Captions somewhat related to images** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example3-elman.png" width=275>
+  <img align="center" src="/report/example3-gru.png" width=275>
+  <img align="center" src="/report/example3-lstm.png" width=275>
+</div>
+
+**Captions unrelated to image** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example4-elman.png" width=275>
+  <img align="center" src="/report/example4-gru.png" width=275>
+  <img align="center" src="/report/example4-lstm.png" width=275>
 </div>
