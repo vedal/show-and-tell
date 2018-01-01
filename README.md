@@ -1,5 +1,3 @@
-
-
 # Neural Image Captioning
 The goal of this project was to tackle the problem of automatic caption generation for images of real world scenes. The work consisted of reimplementing the Neural Image Captioning (NIC) model proposed by Vinyals et al. and running appropriate experiments to test its performance.
 
@@ -34,7 +32,7 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 
 ### Experiments
 #### Goals
-The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the embeddining in the Decoder (language generator) affects the overall performance of the NIC model.
+The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the word embeddings in the Decoder (language generator) affects the overall performance of the NIC model.
 
 
 #### Setup
