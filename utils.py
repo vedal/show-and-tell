@@ -67,8 +67,14 @@ def load_models(checkpoint_file,sample=False):
 
 def dump_losses(losses_train, losses_val, path):
     import pickle
+    dirname = os.path.dirname(path)
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
     with open(path, 'wb') as f:
-        pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f)
+        try:
+            pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f, protocol=2)
+        except:
+            pickle.dump({'losses_train': losses_train, 'losses_val': losses_val}, f)
 
 def convert_back_to_text(idx_arr, vocab):
     from itertools import takewhile
