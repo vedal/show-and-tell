@@ -57,8 +57,8 @@ def main(args):
     # Build the models
     ngpu = 1
     initial_step = initial_epoch = 0
-    embed_size = 512
-    num_hiddens = 512
+    embed_size = args.embed_size
+    num_hiddens = args.num_hidden
     learning_rate = 2e-4
     num_epochs = 3
     log_step = args.log_step
@@ -174,5 +174,9 @@ if __name__ == '__main__':
             action='store_true', help='just show result, requires --checkpoint_file')
     parser.add_argument('--log_step', type=int,
             default=125, help='number of steps in between calculating loss')
+    parser.add_argument('--num_hidden', type=int,
+            default=512, help='number of hidden units in the RNN')
+    parser.add_argument('--embed_size', type=int,
+            default=512, help='number of embeddings in the RNN')
     args = parser.parse_args()
     main(args)
