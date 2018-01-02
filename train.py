@@ -151,14 +151,14 @@ def main(args):
 
                 # Save the models
                 if (step+1) % save_step == 0:
-                    utils.save_models(encoder, decoder, optimizer, epoch, step, losses_train, losses_val, checkpoint_path)
+                    utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_path)
                     utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
     except KeyboardInterrupt:
         pass
     finally:
         # Do final save
-        utils.save_models(encoder, decoder, optimizer, epoch, step, losses_train, losses_val, checkpoint_path)
+        utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_path)
         utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
 
 if __name__ == '__main__':
