@@ -63,7 +63,7 @@ def main(args):
     num_epochs = 3
     log_step = args.log_step
     save_step = 500
-    checkpoint_path = 'checkpoints'
+    checkpoint_dir = args.checkpoint_dir
 
     encoder = CNN(embed_size)
     decoder = RNN(embed_size, num_hiddens, len(vocab), 1, rec_unit=args.rec_unit)
@@ -149,21 +149,23 @@ def main(args):
 
                 # Save the models
                 if (step+1) % save_step == 0:
-                    utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_path)
-                    utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
+                    utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_dir)
+                    utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_dir, 'losses.pkl'))
 
     except KeyboardInterrupt:
         pass
     finally:
         # Do final save
-        utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_path)
-        utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_path, 'losses.pkl'))
+        utils.save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_dir)
+        utils.dump_losses(losses_train, losses_val, os.path.join(checkpoint_dir, 'losses.pkl'))
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--checkpoint_file', type=str,
             default=None, help='path to saved checkpoint')
+    parser.add_argument('--checkpoint_dir', type=str,
+            default='checkpoints', help='directory to save checkpoints')
     parser.add_argument('--batch_size', type=int,
             default=128, help='size of batches')
     parser.add_argument('--rec_unit', type=str,
