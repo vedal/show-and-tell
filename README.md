@@ -52,7 +52,7 @@ Models were implemented in `Python` using the [PyTorch](http://pytorch.org) libr
 
 
 #### Evaluation Methods
-Experiments were evaluated in a qualitative and quantitative manner. Qualitatitve evluation aimed to assess the coherence of the generated sequences and their relevance given the input image. Quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`. 
+Experiments were evaluated in a qualitative and quantitative manner. The qualitatitve evaluation was a subjective assessment of the coherence of the generated sequences and their relevance given the input image, and was done by us manually. The quantitative evaluation of captions compare the MSCOCO reference captions on the validation set with ours using the following metrics: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`.
 
 
 ### Results
