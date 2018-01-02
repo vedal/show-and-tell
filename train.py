@@ -61,7 +61,7 @@ def main(args):
     num_hiddens = 512
     learning_rate = 2e-4
     num_epochs = 3
-    log_step = 125
+    log_step = args.log_step
     save_step = 500
     checkpoint_path = 'checkpoints'
 
@@ -172,5 +172,7 @@ if __name__ == '__main__':
             default='gru', help='choose "gru", "lstm" or "elman"')
     parser.add_argument('--sample', default=False, 
             action='store_true', help='just show result, requires --checkpoint_file')
+    parser.add_argument('--log_step', type=int,
+            default=125, help='number of steps in between calculating loss')
     args = parser.parse_args()
     main(args)
