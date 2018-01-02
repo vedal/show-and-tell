@@ -91,7 +91,6 @@ def main(args):
     total_step = len(train_loader)
     try:
         for epoch in range(initial_epoch, num_epochs):
-            batch_loss_train = []
 
             for step, (images, captions, lengths) in enumerate(train_loader, start=initial_step):
 
@@ -114,7 +113,7 @@ def main(args):
                     outputs = decoder(features, captions, lengths)
 
                 train_loss = criterion(outputs, targets)
-                batch_loss_train.append(train_loss.data[0])
+                losses_train.append(train_loss.data[0])
                 train_loss.backward()
                 optimizer.step()
 
@@ -133,7 +132,6 @@ def main(args):
                         val_loss = criterion(outputs, targets)
                         batch_loss_val.append(val_loss.data[0])
 
-                    losses_train.append(np.mean(batch_loss_train))
                     losses_val.append(np.mean(batch_loss_val))
 
                     # predict
