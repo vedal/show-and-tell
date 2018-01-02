@@ -59,7 +59,7 @@ def main(args):
     initial_step = initial_epoch = 0
     embed_size = args.embed_size
     num_hiddens = args.num_hidden
-    learning_rate = 2e-4
+    learning_rate = 1e-3
     num_epochs = 3
     log_step = args.log_step
     save_step = 500
