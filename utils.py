@@ -36,7 +36,7 @@ def unpickle(file):
         dict = cPickle.load(fo)
     return dict
 
-def save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path):
+def save_models(encoder, decoder, optimizer, step, epoch, losses_train, losses_val, checkpoint_path):
     if not os.path.exists(checkpoint_path):
         os.makedirs(checkpoint_path)
     checkpoint_file = os.path.join(checkpoint_path, 'model-%d-%d.ckpt' %(epoch+1, step+1))
@@ -44,9 +44,11 @@ def save_models(encoder, decoder, optimizer, epoch, step, checkpoint_path):
     torch.save({
         'encoder_state_dict': encoder.state_dict(),
         'decoder_state_dict': decoder.state_dict(),
-        'epoch': epoch,
+        'optimizer': optimizer,
         'step': step,
-        'optimizer': optimizer
+        'epoch': epoch,
+        'losses_train': losses_train,
+        'losses_val': losses_val
         }, checkpoint_file)
 
 def load_models(checkpoint_file,sample=False):
@@ -59,7 +61,9 @@ def load_models(checkpoint_file,sample=False):
     optimizer = checkpoint['optimizer']
     step = checkpoint['step']
     epoch = checkpoint['epoch']
-    return encoder_state_dict, decoder_state_dict, optimizer, step, epoch
+    losses_train = checkpoint['losses_train']
+    losses_val = checkpoint['losses_val']
+    return encoder_state_dict, decoder_state_dict, optimizer, step, epoch, losses_train, losses_val
 
 def dump_losses(losses_train, losses_val, path):
     import pickle
