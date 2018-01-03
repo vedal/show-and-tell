@@ -115,13 +115,13 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
     <td>gru_1024</td>
-    <td>64.0</td>
-    <td>45.3</td>
-    <td>31.2</td>
-    <td>21.5</td>    
-    <td>21.1</td>
-    <td>47.1</td>
-    <td>66.1</td>
+    <td>*64.0*</td>
+    <td>*45.3*</td>
+    <td>*31.2*</td>
+    <td>*21.5*</td>    
+    <td>*21.1*</td>
+    <td>*47.1*</td>
+    <td>*66.1*</td>
   </tr>
   <tr>
     <td>lstm_512</td>
