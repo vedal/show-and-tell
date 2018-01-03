@@ -104,7 +104,6 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>62.9</td>
   </tr>
   <tr>
-  <tr>
     <td>lstm_512</td>
     <td>62.9</td>
     <td>44.3</td>
