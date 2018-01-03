@@ -188,3 +188,13 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   <img align="center" src="/report/example4-gru.png" width=275>
   <img align="center" src="/report/example4-lstm.png" width=275>
 </div>
+
+
+### Discussion
+Studying the results of our experiments, we noted how increasing the number of hidden units describing the RNN state resulted in improved performance across all models, which matched our expectations. We were, however, so surprised to see the ´GRU´ cell outperform ´LSTM´ for both the experiments that we chose to conduct all experiments twice. This is particularly surprising seeing as GRU is primarily known as a computationally more efficient version of the more ´LSTM´, sacrificing a complex stucture with an extra gate for speed and simplicity [^1].
+
+
+References: 
+[^1]: Chung et al. (2014) Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv:1412.3555
+
+
