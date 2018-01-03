@@ -94,6 +94,16 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>57.7</td>
   </tr>
   <tr>
+    <td>elman_1024</td>
+    <td>61.9</td>
+    <td>42.9</td>
+    <td>28.8</td>
+    <td>19.6</td>  
+    <td>19.9</td>
+    <td>45.9</td>
+    <td>58.7</td>
+  </tr>
+  <tr>
     <td>gru_512</td>
     <td>63.9</td>
     <td>44.9</td>
@@ -104,6 +114,16 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>62.9</td>
   </tr>
   <tr>
+    <td>gru_1024</td>
+    <td>64.0</td>
+    <td>45.3</td>
+    <td>31.2</td>
+    <td>21.5</td>    
+    <td>21.1</td>
+    <td>47.1</td>
+    <td>66.1</td>
+  </tr>
+  <tr>
     <td>lstm_512</td>
     <td>62.9</td>
     <td>44.3</td>
@@ -112,6 +132,16 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>19.9</td>
     <td>46.1</td>
     <td>60.2</td>
+  </tr>
+  <tr>
+    <td>lstm_1024</td>
+    <td>63.4</td>
+    <td>45.0</td>
+    <td>31.0</td>
+    <td>21.4</td>    
+    <td>20.8</td>
+    <td>47.1</td>
+    <td>64.4</td>
   </tr>
 </table>
 
