@@ -37,7 +37,7 @@ def main(args):
 
     # Build the models
     embed_size = args.embed_size
-    num_hiddens = 512
+    num_hiddens = args.num_hidden
     checkpoint_path = 'checkpoints'
 
     encoder = CNN(embed_size)
@@ -84,6 +84,8 @@ if __name__ == '__main__':
     parser.add_argument('--image_path', type=str,
             default='data/test2014', help='path to the directory of images')
     parser.add_argument('--embed_size', type=int,
+            default='512', help='number of embeddings')
+    parser.add_argument('--num_hidden', type=int,
             default='512', help='number of embeddings')
     args = parser.parse_args()
     main(args)
