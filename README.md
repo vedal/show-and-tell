@@ -144,16 +144,16 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 </table>
 
 
-**Per-batch loss, training set** 
+<!-- **Per-batch loss, training set** -->
 <div>
-  <img align="center" src="/report/plot_train_512.png" width=275>
-  <img align="center" src="/report/plot_train_1024.png" width=275>
+  <img align="center" src="/report/plot_train_512.png" width=400>
+  <img align="center" src="/report/plot_train_1024.png" width=400>
 </div>
 
-**Average loss over batches, validation set** 
+<!-- **Average loss over batches, validation set** -->
 <div>
-  <img align="center" src="/report/plot_val_512.png" width=275>
-  <img align="center" src="/report/plot_val_1024.png" width=275>
+  <img align="center" src="/report/plot_val_512.png" width=400>
+  <img align="center" src="/report/plot_val_1024.png" width=400>
 </div>
 
 
