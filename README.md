@@ -84,7 +84,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>85.5</td>
   </tr>
   <tr>
-    <td>elman_h512</td>
+    <td>elman_512</td>
     <td>62.5</td>
     <td>43.2</td>
     <td>29.1</td>
@@ -94,7 +94,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>57.7</td>
   </tr>
   <tr>
-    <td>gru_h512</td>
+    <td>gru_512</td>
     <td>63.9</td>
     <td>44.9</td>
     <td>30.5</td>
@@ -105,7 +105,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
   <tr>
-    <td>lstm_h512</td>
+    <td>lstm_512</td>
     <td>62.9</td>
     <td>44.3</td>
     <td>29.8</td>
