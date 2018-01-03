@@ -29,7 +29,6 @@ The NIC architecture consists of two models, the Encoder and a Decoder. The Enco
 <img src="/report/nic-model.png" width=600>
 </p>
 
-
 ### Experiments
 #### Goals
 The goal of the project was to implement and train a NIC architecture and evaluate its performance. A secondary goal, was to check how the type of a recurrent unit and the size of the word embeddings in the Decoder (language generator) affects the overall performance of the NIC model.
@@ -48,12 +47,11 @@ Training parameters:
 - RNN hidden state size: `512` and `1024`
 - Learning rate: `1e-3`, with LR decay every 2000 batches
 
-Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained locally and on rented AWS instances (both local and remote machines were equipped with GPUs).
+Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained either locally or on rented AWS instances (both using GPUs).
 
 
 #### Evaluation Methods
-Experiments were evaluated in a qualitative and quantitative manner. The qualitatitve evaluation was a subjective assessment of the coherence of the generated sequences and their relevance given the input image, and was done by us manually. The quantitative evaluation of captions compare the MSCOCO reference captions on the validation set with ours using the following metrics: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`.
-
+Experiments were evaluated in a qualitative and quantitative manner. The qualitative evaluation assessed the coherence of the generated sequences and their relevance given the input image, and was done by us manually. The quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`.
 
 ### Results
 #### Quantitative
@@ -115,6 +113,20 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>60.2</td>
   </tr>
 </table>
+
+
+**Per-batch loss, training set** 
+<div>
+  <img align="center" src="/report/plot_train_512.png" width=275>
+  <img align="center" src="/report/plot_train_1024.png" width=275>
+</div>
+
+**Average loss over batches, validation set** 
+<div>
+  <img align="center" src="/report/plot_val_512.png" width=275>
+  <img align="center" src="/report/plot_val_1024.png" width=275>
+</div>
+
 
 #### Qualitative
 **Captions without errors** (left-to-right: Elman, GRU, LSTM)
