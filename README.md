@@ -45,7 +45,7 @@ Training parameters:
 - Batch size: `128` (3236 batches per epoch)
 - Vocabulary size: `15,000` most popular words
 - Embedding size: `512` (image summary vector, word embeddings)
-- RNN hidden state size: `256` and `512`
+- RNN hidden state size: `512` and `1024`
 - Learning rate: `1e-3`, with LR decay every 2000 batches
 
 Models were implemented in `Python` using the [PyTorch](http://pytorch.org) library. Models were trained locally and on rented AWS instances (both local and remote machines were equipped with GPUs).
@@ -68,9 +68,9 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th>BLEU-1</th>
     <th>BLEU-2</th>
     <th>BLEU-3</th>
-    <th>BLEU-4</th>    
-    <th>ROGUE-L</th>
+    <th>BLEU-4</th>  
     <th>METEOR</th>
+    <th>ROGUE-L</th>
     <th>CIDEr</th>
   </tr>
   <tr>
@@ -78,73 +78,43 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>N/A</td>
     <td>N/A</td>
     <td>N/A</td>
-    <td>27.7</td>    
-    <td>N/A</td>
+    <td>27.7</td> 
     <td>23.7</td>
+    <td>N/A</td>
     <td>85.5</td>
   </tr>
   <tr>
-    <td>elman256</td>
-    <td>61.6</td>
-    <td>42.7</td>
-    <td>28.4</td>
-    <td>19.0</td>  
-    <td>45.1</td>
-    <td>18.9</td>
-    <td>53.7</td>
-  </tr>
-  <tr>
-    <td>elman512</td>
-    <td>62.3</td>
-    <td>43.5</td>
-    <td>29.5</td>
-    <td>20.1</td>    
-    <td>45.8</td>
-    <td>19.7</td>
-    <td>58.7</td>
-  </tr>
-  <tr>
-    <td>gru256</td>
-    <td>44.9</td>
-    <td>24.9</td>
-    <td>13.7</td>
-    <td>7.6</td>    
-    <td>33.4</td>
-    <td>14.4</td>
-    <td>27.7</td>
-  </tr>
-  <tr>
-    <td>gru512</td>
-    <td>44.4</td>
-    <td>24.7</td>
-    <td>13.5</td>
-    <td>7.5</td>    
-    <td>33.0</td>
-    <td>14.3</td>
-    <td>27.6</td>
-  </tr>
-  <tr>
-    <td>lstm256</td>
-    <td>59.5</td>
-    <td>40.0</td>
-    <td>25.9</td>
-    <td>16.7</td>    
-    <td>43.4</td>
-    <td>17.5</td>
+    <td>elman_h512</td>
+    <td>62.5</td>
+    <td>43.2</td>
+    <td>29.1</td>
+    <td>19.8</td>  
+    <td>19.5</td>
     <td>45.6</td>
+    <td>57.7</td>
   </tr>
   <tr>
-    <td>lstm512</td>
-    <td>60.4</td>
-    <td>41.3</td>
-    <td>27.2</td>
-    <td>18.0</td>    
-    <td>44.6</td>
-    <td>18.8</td>
-    <td>51.2</td>
+    <td>gru_h512</td>
+    <td>63.9</td>
+    <td>44.9</td>
+    <td>30.5</td>
+    <td>20.8</td>    
+    <td>20.4</td>
+    <td>46.6</td>
+    <td>62.9</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>lstm_h512</td>
+    <td>62.9</td>
+    <td>44.3</td>
+    <td>29.8</td>
+    <td>20.3</td>    
+    <td>19.9</td>
+    <td>46.1</td>
+    <td>60.2</td>
   </tr>
 </table>
-
 
 #### Qualitative
 **Captions without errors** (left-to-right: Elman, GRU, LSTM)
