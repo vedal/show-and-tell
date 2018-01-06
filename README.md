@@ -144,6 +144,32 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 </table>
 
 
+<table>
+  <tr>
+    <th colspan="8">Test Data (evaluated on unknown test data on MSCOCO server </th>
+  </tr>
+  <tr>
+    <th>Model</th>
+    <th>BLEU-1</th>
+    <th>BLEU-2</th>
+    <th>BLEU-3</th>
+    <th>BLEU-4</th>  
+    <th>METEOR c40</th>
+    <th>ROGUE-L c40</th>
+    <th>CIDEr c40</th>
+  </tr>
+  <tr>
+    <td>elman_1024</td>
+    <td>0.62</td>
+    <td>0.43</td>
+    <td>0.29</td>
+    <td>0.19</td> 
+    <td>0.27</td>
+    <td>0.58</td>
+    <td>0.60</td>
+  </tr>
+</table>
+
 <!-- **Per-batch loss, training set** -->
 <div>
   <img align="center" src="/report/plot_train_512.png" width=400>
