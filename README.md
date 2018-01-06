@@ -223,16 +223,23 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
     <td>elman_1024</td>
-    <td>0.62</td>
-    <td>0.43</td>
-    <td>0.29</td>
-    <td>0.19</td> 
-    <td>0.27</td>
-    <td>0.58</td>
-    <td>0.60</td>
+    <td>0.618239</td>
+    <td>0.799499</td>
+    <td>0.428302</td>
+    <td>0.662375</td>
+    <td>0.287291</td>
+    <td>0.518837</td>
+    <td>0.194510</td>
+    <td>0.397564</td>
+    <td>0.198652</td>
+    <td>0.266634</td>
+    <td>0.457065</td>
+    <td>0.583692</td>
+    <td>0.579971</td>
+    <td>0.600424</td>
   </tr>
 </table>
-
+_Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_
 
 
 ### Discussion
@@ -241,5 +248,5 @@ Studying the results of our experiments, we noted how increasing the number of h
 
 ### References: 
 [1]: Chung et al. (2014) Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv:1412.3555
-
+[2]: X. Chen et al. (2015) Microsoft COCO Captions: Data Collection and Evaluation Server. arXiv:1504.00325
 
