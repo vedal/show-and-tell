@@ -37,7 +37,7 @@ The goal of the project was to implement and train a NIC architecture and evalua
 #### Setup
 The Encoder was a `ResNet-34` architecture with pre-trained weights on the `ImageNet` dataset. The output layer of the network was replaced with a new layer with a size definable by the user. All weights, except from the last layer, were frozen during the training procedure.
 
-The Decoder was a single layer recurrent neural network. Three different recurrent units were tested, `Elman`, `GRU`, and `LSTM`.
+The Decoder was a single layer recurrent neural network. Three different recurrent units were tested, `Elman`, `GRU`, and `LSTM`. The `Elman` refers to the basic rnn architecture.
 
 Training parameters:
 - Number of epochs: `3`
@@ -55,7 +55,7 @@ Experiments were evaluated in a qualitative and quantitative manner. The qualita
 
 ### Results
 #### Quantitative
-Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article. "Elman" refers to the basic rnn architecture.
+Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article.
 
 <table>
   <tr>
