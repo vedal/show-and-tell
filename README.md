@@ -261,7 +261,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
-_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper, Oriol Vinyals. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores._
+_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper, Oriol Vinyals. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to keep our scores in the range [0,1] as the website for this presentation, rather than [0,100] as in the previous table, which related to the Vinyals paper._ 
 
 
 ### Discussion
