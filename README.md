@@ -55,7 +55,7 @@ Experiments were evaluated in a qualitative and quantitative manner. The qualita
 
 ### Results
 #### Quantitative
-Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article.
+Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article. "Elman" refers to the basic rnn architecture.
 
 <table>
   <tr>
