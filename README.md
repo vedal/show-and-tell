@@ -223,45 +223,45 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
     <td><sub>elman1024</sub></td>
-    <td><sub>0.618</sub></td>
-    <td><sub>0.799</sub></td>
-    <td><sub>0.428</sub></td>
-    <td><sub>0.662</sub></td>
-    <td><sub>0.287</sub></td>
-    <td><sub>0.519</sub></td>
-    <td><sub>0.195</sub></td>
-    <td><sub>0.398</sub></td>
-    <td><sub>0.199</sub></td>
-    <td><sub>0.267</sub></td>
-    <td><sub>0.457</sub></td>
-    <td><sub>0.584</sub></td>
-    <td><sub>0.580</sub></td>
-    <td><sub>0.600</sub></td>
+    <td><sub>61.8</sub></td>
+    <td><sub>79.9</sub></td>
+    <td><sub>42.8</sub></td>
+    <td><sub>66.2</sub></td>
+    <td><sub>28.7</sub></td>
+    <td><sub>51.9</sub></td>
+    <td><sub>19.5</sub></td>
+    <td><sub>39.8</sub></td>
+    <td><sub>19.9</sub></td>
+    <td><sub>26.7</sub></td>
+    <td><sub>45.7</sub></td>
+    <td><sub>58.4</sub></td>
+    <td><sub>58.0</sub></td>
+    <td><sub>60.0</sub></td>
   </tr>
   <tr/>
   <tr>
     <td><sub>OriolVinyals</sub></td>
-    <td><sub>0.713</sub></td>
-    <td><sub>0.895</sub></td>
-    <td><sub>0.542</sub></td>
-    <td><sub>0.802</sub></td>
-    <td><sub>0.407</sub></td>
-    <td><sub>0.694</sub></td>
-    <td><sub>0.309</sub></td>
-    <td><sub>0.587</sub></td>
-    <td><sub>0.254</sub></td>
-    <td><sub>0.346</sub></td>
-    <td><sub>0.530</sub></td>
-    <td><sub>0.682</sub></td>
-    <td><sub>0.943</sub></td>
-    <td><sub>0.946</sub></td>
+    <td><sub>71.3</sub></td>
+    <td><sub>89.5</sub></td>
+    <td><sub>54.2</sub></td>
+    <td><sub>80.2</sub></td>
+    <td><sub>40.7</sub></td>
+    <td><sub>69.4</sub></td>
+    <td><sub>30.9</sub></td>
+    <td><sub>58.7</sub></td>
+    <td><sub>25.4</sub></td>
+    <td><sub>34.6</sub></td>
+    <td><sub>53.0</sub></td>
+    <td><sub>68.2</sub></td>
+    <td><sub>94.3</sub></td>
+    <td><sub>94.6</sub></td>
   </tr>
   
 </table>
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
-_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper, Oriol Vinyals. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to keep our scores in the range [0,1] as the website for this presentation, rather than [0,100] as in the previous table, which related to the Vinyals paper._ 
+_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper, Oriol Vinyals. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and the Vinyals paper._ 
 
 
 ### Discussion
