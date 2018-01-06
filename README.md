@@ -189,7 +189,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   <img align="center" src="/report/example4-lstm.png" width=275>
 </div>
 
-
+<font size="8">
 <table>
   <tr>
     <th colspan="8">Test Data (evaluated on unknown test data on MSCOCO server) </th>
@@ -239,6 +239,8 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td>0.600424</td>
   </tr>
 </table>
+</font>  
+  
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
 
