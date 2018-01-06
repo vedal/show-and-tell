@@ -195,50 +195,48 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th colspan="8">Test Data (evaluated on unknown test data on MSCOCO server) </th>
   </tr>
   <tr>
-    <th>Model</th>
-    <th colspan="2">BLEU-1</th>
-    <th colspan="2">BLEU-2</th>
-    <th colspan="2">BLEU-3</th>
-    <th colspan="2">BLEU-4</th>  
-    <th colspan="2">METEOR</th>
-    <th colspan="2">ROGUE-L</th>
-    <th colspan="2">CIDEr</th>
+    <th><sub>Model</sub></th>
+    <th colspan="2"><sub>BLEU-1</sub></th>
+    <th colspan="2"><sub>BLEU-2</sub></th>
+    <th colspan="2"><sub>BLEU-3</sub></th>
+    <th colspan="2"><sub>BLEU-4</sub></th>  
+    <th colspan="2"><sub>METEOR</sub></th>
+    <th colspan="2"><sub>ROGUE-L</sub></th>
+    <th colspan="2"><sub>CIDEr</sub></th>
   </tr>
   <tr>
-<sub>
-  <th></th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
-    <th>c5</th>
-    <th>c40</th>
+<th></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
+    <th><sub>c5</sub></th>
+    <th><sub>c40</sub></th>
   </tr>
   <tr>
-    <td>elman_1024</td>
-    <td>0.618239</td>
-    <td>0.799499</td>
-    <td>0.428302</td>
-    <td>0.662375</td>
-    <td>0.287291</td>
-    <td>0.518837</td>
-    <td>0.194510</td>
-    <td>0.397564</td>
-    <td>0.198652</td>
-    <td>0.266634</td>
-    <td>0.457065</td>
-    <td>0.583692</td>
-    <td>0.579971</td>
-    <td>0.600424</td>
-</sub>
+    <td><sub>elman_1024</sub></td>
+    <td><sub>0.618239</sub></td>
+    <td><sub>0.799499</sub></td>
+    <td><sub>0.428302</sub></td>
+    <td><sub>0.662375</sub></td>
+    <td><sub>0.287291</sub></td>
+    <td><sub>0.518837</sub></td>
+    <td><sub>0.194510</sub></td>
+    <td><sub>0.397564</sub></td>
+    <td><sub>0.198652</sub></td>
+    <td><sub>0.266634</sub></td>
+    <td><sub>0.457065</sub></td>
+    <td><sub>0.583692</sub></td>
+    <td><sub>0.579971</sub></td>
+    <td><sub>0.600424</sub></td>
   </tr>
 </table>
   
