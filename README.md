@@ -223,20 +223,20 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
     <td><sub>elman_1024</sub></td>
-    <td><sub>0.618239</sub></td>
-    <td><sub>0.799499</sub></td>
-    <td><sub>0.428302</sub></td>
-    <td><sub>0.662375</sub></td>
-    <td><sub>0.287291</sub></td>
-    <td><sub>0.518837</sub></td>
-    <td><sub>0.194510</sub></td>
-    <td><sub>0.397564</sub></td>
-    <td><sub>0.198652</sub></td>
-    <td><sub>0.266634</sub></td>
-    <td><sub>0.457065</sub></td>
-    <td><sub>0.583692</sub></td>
-    <td><sub>0.579971</sub></td>
-    <td><sub>0.600424</sub></td>
+    <td><sub>0.618</sub></td>
+    <td><sub>0.799</sub></td>
+    <td><sub>0.428</sub></td>
+    <td><sub>0.662</sub></td>
+    <td><sub>0.287</sub></td>
+    <td><sub>0.519</sub></td>
+    <td><sub>0.195</sub></td>
+    <td><sub>0.398</sub></td>
+    <td><sub>0.199</sub></td>
+    <td><sub>0.267</sub></td>
+    <td><sub>0.457</sub></td>
+    <td><sub>0.584</sub></td>
+    <td><sub>0.580</sub></td>
+    <td><sub>0.600</sub></td>
   </tr>
 </table>
   
