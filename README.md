@@ -12,7 +12,7 @@ The project was carried out as part of the ID2223 "Scalable Machine Learning and
 
 ### References
 The implemented architecture was based on the following publication:
-- ["Show and Tell: A Neural Image Captiong Generator" by Vinyals et al.](https://arxiv.org/abs/1411.4555)
+- ["Show and Tell: A Neural Image Captiong Generator" by Vinyals et al.](https://arxiv.org/abs/1411.4555) [3]
 
 
 ### Datasets
@@ -261,7 +261,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
-_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper, Oriol Vinyals. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and the Vinyals paper._ 
+_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
 
 
 ### Discussion
@@ -269,6 +269,6 @@ Studying the results of our experiments, we noted how increasing the number of h
 
 
 ### References: 
-[1]: Chung et al. (2014) Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv:1412.3555.  
-[2]: X. Chen et al. (2015) Microsoft COCO Captions: Data Collection and Evaluation Server. arXiv:1504.00325
-
+[1] Chung et al. (2014) Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv:1412.3555.  
+[2] X. Chen et al. (2015) Microsoft COCO Captions: Data Collection and Evaluation Server. arXiv:1504.00325
+[3] O. Vinyals et al. (2014) Show and Tell: A Neural Image Captiong Generator, arXiv:1411.4555
