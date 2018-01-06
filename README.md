@@ -196,13 +196,13 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
   <tr>
     <th>Model</th>
-    <th>BLEU-1</th>
-    <th>BLEU-2</th>
-    <th>BLEU-3</th>
-    <th>BLEU-4</th>  
-    <th>METEOR c40</th>
-    <th>ROGUE-L c40</th>
-    <th>CIDEr c40</th>
+    <th colspan="2">BLEU-1</th>
+    <th colspan="2">BLEU-2</th>
+    <th colspan="2">BLEU-3</th>
+    <th colspan="2">BLEU-4</th>  
+    <th colspan="2">METEOR</th>
+    <th colspan="2">ROGUE-L</th>
+    <th colspan="2">CIDEr</th>
   </tr>
   <tr>
     <th></th>
