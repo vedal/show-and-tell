@@ -189,7 +189,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   <img align="center" src="/report/example4-lstm.png" width=275>
 </div>
 
-<font size="8">
+<font size="6">
 <table>
   <tr>
     <th colspan="8">Test Data (evaluated on unknown test data on MSCOCO server) </th>
