@@ -144,6 +144,19 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 </table>
 
 
+<!-- **Per-batch loss, training set** -->
+<div>
+  <img align="center" src="/report/plot_train_512.png" width=400>
+  <img align="center" src="/report/plot_train_1024.png" width=400>
+</div>
+
+<!-- **Average loss over batches, validation set** -->
+<div>
+  <img align="center" src="/report/plot_val_512.png" width=400>
+  <img align="center" src="/report/plot_val_1024.png" width=400>
+</div>
+
+
 <table>
   <tr>
     <th colspan="16">Test Data (evaluated on unknown test data on MSCOCO server) </th>
@@ -217,17 +230,6 @@ _Note: The "MSCOCO c5" dataset contains five reference captions for every image 
 
 _Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
 
-<!-- **Per-batch loss, training set** -->
-<div>
-  <img align="center" src="/report/plot_train_512.png" width=400>
-  <img align="center" src="/report/plot_train_1024.png" width=400>
-</div>
-
-<!-- **Average loss over batches, validation set** -->
-<div>
-  <img align="center" src="/report/plot_val_512.png" width=400>
-  <img align="center" src="/report/plot_val_1024.png" width=400>
-</div>
 
 
 #### Qualitative
