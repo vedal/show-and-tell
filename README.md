@@ -190,9 +190,9 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 </div>
 
 
-<table width="100%">
+<table>
   <tr>
-    <th colspan="8">Test Data (evaluated on unknown test data on MSCOCO server) </th>
+    <th colspan="16">Test Data (evaluated on unknown test data on MSCOCO server) </th>
   </tr>
   <tr>
     <th><sub>Model</sub></th>
@@ -222,7 +222,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th><sub>c40</sub></th>
   </tr>
   <tr>
-    <td><sub>elman_1024</sub></td>
+    <td><sub>elman1024</sub></td>
     <td><sub>0.618</sub></td>
     <td><sub>0.799</sub></td>
     <td><sub>0.428</sub></td>
