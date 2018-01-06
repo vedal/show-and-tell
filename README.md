@@ -205,7 +205,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th colspan="2"><sub>CIDEr</sub></th>
   </tr>
   <tr>
-<th></th>
+    <th></th>
     <th><sub>c5</sub></th>
     <th><sub>c40</sub></th>
     <th><sub>c5</sub></th>
@@ -238,27 +238,29 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td><sub>0.580</sub></td>
     <td><sub>0.600</sub></td>
   </tr>
+  <tr/>
   <tr>
-<td><sub>Vinyals</sub></td>
-<td><sub>0.713</sub></td>
-<td><sub>0.895</sub></td>
-<td><sub>0.542</sub></td>
-<td><sub>0.802</sub></td>
-<td><sub>0.407</sub></td>
-<td><sub>0.694</sub></td>
-<td><sub>0.309</sub></td>
-<td><sub>0.587</sub></td>
-<td><sub>0.254</sub></td>
-<td><sub>0.346</sub></td>
-<td><sub>0.530</sub></td>
-<td><sub>0.682</sub></td>
-<td><sub>0.943</sub></td>
-<td><sub>0.946</sub></td>
-</tr>
+    <td><sub>Vinyals</sub></td>
+    <td><sub>0.713</sub></td>
+    <td><sub>0.895</sub></td>
+    <td><sub>0.542</sub></td>
+    <td><sub>0.802</sub></td>
+    <td><sub>0.407</sub></td>
+    <td><sub>0.694</sub></td>
+    <td><sub>0.309</sub></td>
+    <td><sub>0.587</sub></td>
+    <td><sub>0.254</sub></td>
+    <td><sub>0.346</sub></td>
+    <td><sub>0.530</sub></td>
+    <td><sub>0.682</sub></td>
+    <td><sub>0.943</sub></td>
+    <td><sub>0.946</sub></td>
+  </tr>
   
 </table>
   
-_Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
+_Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_. 
+_Note2: We assume the "Vinyals" is the top score of Oriol Vinyals, the author of our main reference paper. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores.
 
 
 ### Discussion
