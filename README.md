@@ -144,52 +144,6 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 </table>
 
 
-<!-- **Per-batch loss, training set** -->
-<div>
-  <img align="center" src="/report/plot_train_512.png" width=400>
-  <img align="center" src="/report/plot_train_1024.png" width=400>
-</div>
-
-<!-- **Average loss over batches, validation set** -->
-<div>
-  <img align="center" src="/report/plot_val_512.png" width=400>
-  <img align="center" src="/report/plot_val_1024.png" width=400>
-</div>
-
-
-#### Qualitative
-**Captions without errors** (left-to-right: Elman, GRU, LSTM)
-<div>
-  <img align="center" src="/report/example1-elman.png" width=275>
-  <img align="center" src="/report/example1-gru.png" width=275>
-  <img align="center" src="/report/example1-lstm.png" width=275>
-</div>
-
-
-**Captions with minor errors** (left-to-right: Elman, GRU, LSTM)
-<div>
-  <img align="center" src="/report/example2-elman.png" width=275>
-  <img align="center" src="/report/example2-gru.png" width=275>
-  <img align="center" src="/report/example2-lstm.png" width=275>
-</div>
-
-
-**Captions somewhat related to images** (left-to-right: Elman, GRU, LSTM)
-<div>
-  <img align="center" src="/report/example3-elman.png" width=275>
-  <img align="center" src="/report/example3-gru.png" width=275>
-  <img align="center" src="/report/example3-lstm.png" width=275>
-</div>
-
-
-**Captions unrelated to image** (left-to-right: Elman, GRU, LSTM)
-<div>
-  <img align="center" src="/report/example4-elman.png" width=275>
-  <img align="center" src="/report/example4-gru.png" width=275>
-  <img align="center" src="/report/example4-lstm.png" width=275>
-</div>
-
-
 <table>
   <tr>
     <th colspan="16">Test Data (evaluated on unknown test data on MSCOCO server) </th>
@@ -262,6 +216,52 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
 _Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
+
+<!-- **Per-batch loss, training set** -->
+<div>
+  <img align="center" src="/report/plot_train_512.png" width=400>
+  <img align="center" src="/report/plot_train_1024.png" width=400>
+</div>
+
+<!-- **Average loss over batches, validation set** -->
+<div>
+  <img align="center" src="/report/plot_val_512.png" width=400>
+  <img align="center" src="/report/plot_val_1024.png" width=400>
+</div>
+
+
+#### Qualitative
+**Captions without errors** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example1-elman.png" width=275>
+  <img align="center" src="/report/example1-gru.png" width=275>
+  <img align="center" src="/report/example1-lstm.png" width=275>
+</div>
+
+
+**Captions with minor errors** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example2-elman.png" width=275>
+  <img align="center" src="/report/example2-gru.png" width=275>
+  <img align="center" src="/report/example2-lstm.png" width=275>
+</div>
+
+
+**Captions somewhat related to images** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example3-elman.png" width=275>
+  <img align="center" src="/report/example3-gru.png" width=275>
+  <img align="center" src="/report/example3-lstm.png" width=275>
+</div>
+
+
+**Captions unrelated to image** (left-to-right: Elman, GRU, LSTM)
+<div>
+  <img align="center" src="/report/example4-elman.png" width=275>
+  <img align="center" src="/report/example4-gru.png" width=275>
+  <img align="center" src="/report/example4-lstm.png" width=275>
+</div>
+
 
 
 ### Discussion
