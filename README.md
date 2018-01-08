@@ -54,6 +54,20 @@ Models were implemented in `Python` using the [PyTorch](http://pytorch.org) libr
 Experiments were evaluated in a qualitative and quantitative manner. The qualitative evaluation assessed the coherence of the generated sequences and their relevance given the input image, and was done by us manually. The quantitative evaluation enabled comparison of trained models with reference models from the authors. The following metrics were used: `BLEU-1`, `BLEU-2`, `BLEU-3`, `BLEU-4`, `ROGUE-L`, `METEOR`, and `CIDEr`.
 
 ### Results
+
+#### Training Progress
+<!-- **Per-batch loss, training set** -->
+<div>
+  <img align="center" src="/report/plot_train_512.png" width=400>
+  <img align="center" src="/report/plot_train_1024.png" width=400>
+</div>
+
+<!-- **Average loss over batches, validation set** -->
+<div>
+  <img align="center" src="/report/plot_val_512.png" width=400>
+  <img align="center" src="/report/plot_val_1024.png" width=400>
+</div>
+
 #### Quantitative
 Qualitative results are presented on the Validation and Test sets. Results obtained with the reimplemented model are compared with the results obtained by the authors of the article.
 
@@ -72,7 +86,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th>CIDEr</th>
   </tr>
   <tr>
-    <td>Vinyal et al. (4k subset)</td>
+    <td>Vinyals et al. (4k subset)</td>
     <td>N/A</td>
     <td>N/A</td>
     <td>N/A</td>
@@ -143,23 +157,9 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   </tr>
 </table>
 
-
-<!-- **Per-batch loss, training set** -->
-<div>
-  <img align="center" src="/report/plot_train_512.png" width=400>
-  <img align="center" src="/report/plot_train_1024.png" width=400>
-</div>
-
-<!-- **Average loss over batches, validation set** -->
-<div>
-  <img align="center" src="/report/plot_val_512.png" width=400>
-  <img align="center" src="/report/plot_val_1024.png" width=400>
-</div>
-
-
 <table>
   <tr>
-    <th colspan="16">Test Data (evaluated on unknown test data on MSCOCO server) </th>
+    <th colspan="16">Test Data</th>
   </tr>
   <tr>
     <th><sub>Model</sub></th>
@@ -189,25 +189,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <th><sub>c40</sub></th>
   </tr>
   <tr>
-    <td><sub>elman1024</sub></td>
-    <td><sub>61.8</sub></td>
-    <td><sub>79.9</sub></td>
-    <td><sub>42.8</sub></td>
-    <td><sub>66.2</sub></td>
-    <td><sub>28.7</sub></td>
-    <td><sub>51.9</sub></td>
-    <td><sub>19.5</sub></td>
-    <td><sub>39.8</sub></td>
-    <td><sub>19.9</sub></td>
-    <td><sub>26.7</sub></td>
-    <td><sub>45.7</sub></td>
-    <td><sub>58.4</sub></td>
-    <td><sub>58.0</sub></td>
-    <td><sub>60.0</sub></td>
-  </tr>
-  <tr/>
-  <tr>
-    <td><sub>OriolVinyals</sub></td>
+    <td><sub>Vinyals et al.</sub></td>
     <td><sub>71.3</sub></td>
     <td><sub>89.5</sub></td>
     <td><sub>54.2</sub></td>
@@ -223,7 +205,23 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td><sub>94.3</sub></td>
     <td><sub>94.6</sub></td>
   </tr>
-  
+  <tr>
+    <td><sub>elman_1024</sub></td>
+    <td><sub>61.8</sub></td>
+    <td><sub>79.9</sub></td>
+    <td><sub>42.8</sub></td>
+    <td><sub>66.2</sub></td>
+    <td><sub>28.7</sub></td>
+    <td><sub>51.9</sub></td>
+    <td><sub>19.5</sub></td>
+    <td><sub>39.8</sub></td>
+    <td><sub>19.9</sub></td>
+    <td><sub>26.7</sub></td>
+    <td><sub>45.7</sub></td>
+    <td><sub>58.4</sub></td>
+    <td><sub>58.0</sub></td>
+    <td><sub>60.0</sub></td>
+  </tr>
 </table>
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
