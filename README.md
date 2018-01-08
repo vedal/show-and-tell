@@ -226,7 +226,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
-_Note2: We assume the bottom score "OriolVinyals" is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
+_Note2: We assume the bottom score "Vinyals et al." is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
 
 
 
@@ -263,9 +263,8 @@ _Note2: We assume the bottom score "OriolVinyals" is the top score of the first 
 </div>
 
 
-
 ### Discussion
-Studying the results of our experiments, we noted how increasing the number of hidden units describing the RNN state resulted in improved performance across all models, which matched our expectations. We were, however, so surprised to see the `GRU` cell outperform `LSTM` for both the experiments that we chose to conduct all experiments twice. This is particularly surprising seeing as `GRU` is primarily known as a computationally more efficient version of the more `LSTM`, sacrificing a complex stucture with an extra gate for speed and simplicity [1].
+Studying the results of our experiments, we noted how increasing the number of hidden units describing the RNN state resulted in improved performance across all models, which matched our expectations. However, it was interesting to see the `GRU` cell outperform `LSTM` in both of the experiments. A possible explanation of this observation is that for generating relatively short sequences (most captions had up to 20 words) the architecture of the `LSTM` cell might be overly complex. Since the `LSTM` has more trainable parameters when compares to `GRU` it would be interesting to see if extending the training procedure in the case of `LSTM`-based networks allows them to obtain the same or better performance than `GRU`-based networks.
 
 
 ### References: 
