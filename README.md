@@ -281,7 +281,7 @@ _Note2: We assume the bottom score "Vinyals et al." is the top score of the firs
 
 
 ### Discussion
-Studying the results of our experiments, we noted how increasing the number of hidden units describing the RNN state resulted in improved performance across all models, which matched our expectations. However, it was interesting to see the `GRU` cell outperform `LSTM` in both of the experiments. A possible explanation of this observation is that for generating relatively short sequences (most captions had up to 20 words) the architecture of the `LSTM` cell might be overly complex. Since the `LSTM` has more trainable parameters when compares to `GRU` it would be interesting to see if extending the training procedure in the case of `LSTM`-based networks allows them to obtain the same or better performance than `GRU`-based networks.
+Studying the results of our experiments, we noted how increasing the number of hidden units describing the RNN state resulted in improved performance across all models, which matched our expectations. However, it was interesting to see the `GRU` cell outperform `LSTM` in both experiments. A possible explanation of this is that for generating relatively short sequences (most captions had up to 20 words) the architecture of the `LSTM` cell might be overly complex. The sequences might also be too short the LSTM to have `time to shine`. Since the `LSTM` has more trainable parameters when compares to `GRU` it would be interesting to see if extending the training procedure in the case of `LSTM`-based networks allows them to obtain the same or better performance than `GRU`-based networks.
 
 
 ### References: 
