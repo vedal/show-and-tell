@@ -222,6 +222,23 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
     <td><sub>58.0</sub></td>
     <td><sub>60.0</sub></td>
   </tr>
+  <tr>
+    <td><sub>gru_1024</sub></td>
+    <td><sub>63.8</sub></td>
+    <td><sub>81.2</sub></td>
+    <td><sub>45.0</sub></td>
+    <td><sub>68.1</sub></td>
+    <td><sub>30.1</sub></td>
+    <td><sub>54.4</sub></td>
+    <td><sub>21.3</sub></td>
+    <td><sub>42.5</sub></td>
+    <td><sub>21.0</sub></td>
+    <td><sub>27.8</sub></td>
+    <td><sub>47.0</sub></td>
+    <td><sub>59.5</sub></td>
+    <td><sub>65.4</sub></td>
+    <td><sub>66.4</sub></td>
+  </tr>
 </table>
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
