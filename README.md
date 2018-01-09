@@ -303,5 +303,5 @@ Studying the results of our experiments, we noted how increasing the number of h
 
 ### References: 
 [1] Chung et al. (2014) Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling. arXiv:1412.3555.  
-[2] X. Chen et al. (2015) Microsoft COCO Captions: Data Collection and Evaluation Server. arXiv:1504.00325
+[2] X. Chen et al. (2015) Microsoft COCO Captions: Data Collection and Evaluation Server. arXiv:1504.00325.  
 [3] O. Vinyals et al. (2014) Show and Tell: A Neural Image Captiong Generator, arXiv:1411.4555
