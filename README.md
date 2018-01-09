@@ -260,7 +260,7 @@ Qualitative results are presented on the Validation and Test sets. Results obtai
   
 _Note: The "MSCOCO c5" dataset contains five reference captions for every image in the MS COCO training, validation and testing datasets. "MSCOCO c40" contains 40 reference sentences for a randomly chosen 5,000 images from the MS COCO testing dataset[2]_.  
 
-_Note2: We assume the bottom score "Vinyals et al." is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map our scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al._ 
+_Note2: We assume the score "Vinyals et al." is the top score of the first author of our main reference paper [3]. It comes from the MSCOCO leaderboard at www.codalab.org, where we evaluated our scores. We decided to map the scores from the range [0,1] displayed on the website to [0,100] to keep consistency with previous table and Vinyals et al. Our results for `GRU` and `LSTM` are on place 84 and 85 of the codalab leader board, respectively.
 
 
 
