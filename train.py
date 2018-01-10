@@ -40,8 +40,8 @@ def main(args):
                                         num_workers=num_workers)
 
     # Assumes we extracted Wojtek's devset in data/
-    IMAGES_PATH = 'data/data_pack/images/dev2014'
-    CAPTION_FILE_PATH = 'data/data_pack/captions_dev2014.json'
+    IMAGES_PATH = 'data/val2014'
+    CAPTION_FILE_PATH = 'data/annotations/captions_val2014.json'
     val_loader = get_coco_data_loader(path=IMAGES_PATH,
                                       json=CAPTION_FILE_PATH,
                                       vocab=vocab,

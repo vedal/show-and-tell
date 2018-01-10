@@ -11,13 +11,15 @@ from vocab import dump_vocab
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataType', type=str,
-            default='train', help='type of dataset to download: train/val/test')
+    parser.add_argument('--test', action='store_true',  help='Downloads the test set.')
     args = parser.parse_args()
 
     try:
-        dataType = DataType(args.dataType)
-        download_coco(dataType)
+        if args.test:
+            download_coco(DataType.Test)
+        else:
+            download_coco(DataType.Train)
+            download_coco(DataType.Val)
         download_annotations()
         dump_vocab()
     except Exception as e:
