@@ -3,6 +3,30 @@ The goal of this project was to tackle the problem of automatic caption generati
 
 The project was carried out as part of the ID2223 "Scalable Machine Learning and Deep Learning" course at [KTH Royal Institute of Technology](http://kth.se).
 
+## To run
+
+#### Install pip packages and cocoapi:
+```
+pip install -r requirements.txt
+git clone https://github.com/cocodataset/cocoapi
+cd cocoapi/PythonAPI/; make install; cd ../..
+```
+
+#### Install PyTorch for python 3.5 with CUDA 8.0 (check pytorch.org for other options):
+
+`pip3 install http://download.pytorch.org/whl/cu80/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl`
+
+#### Fetch the data (also builds a vocabulary):
+
+`python fetch_data.py # (to also download test set, run python fetch_data --test)`
+
+#### Start training with default arguments (check train.py for more arguments)
+
+`python train.py`
+
+#### Evaluate
+
+`python train.py --sample --checkpoint_file <your-checkpoint-file>`
 
 ### Contributors
 - Martin Hwasser (github: [hwaxxer](https://github.com/hwaxxer/)) 
