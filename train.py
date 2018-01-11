@@ -39,7 +39,6 @@ def main(args):
                                         shuffle=True,
                                         num_workers=num_workers)
 
-    # Assumes we extracted Wojtek's devset in data/
     IMAGES_PATH = 'data/val2014'
     CAPTION_FILE_PATH = 'data/annotations/captions_val2014.json'
     val_loader = get_coco_data_loader(path=IMAGES_PATH,
